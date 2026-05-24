@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#5B8C85">
+  <title>Mind Guard - العلاج المعرفي السلوكي</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="cbt-screen">
+    <h1 class="page-title text-center">العلاج المعرفي السلوكي (ABC)</h1>
+    <p class="page-subtitle text-center">أعد هيكلة أفكارك السلبية</p>
+
+    <div class="cbt-section">
+      <div class="cbt-section-title">
+        <span class="section-num">1</span>
+        الموقف (Activating Event)
+      </div>
+      <input type="text" id="cbtEvent" placeholder="مثال: تأخرت عن موعد مهم">
+    </div>
+
+    <div class="cbt-section">
+      <div class="cbt-section-title">
+        <span class="section-num">2</span>
+        الفكرة التلقائية (Automatic Thought)
+      </div>
+      <textarea id="cbtThought" placeholder="مثال: أنا فاشل دائماً"></textarea>
+    </div>
+
+    <div class="cbt-section">
+      <div class="cbt-section-title">
+        <span class="section-num">3</span>
+        التشويه المعرفي (Cognitive Distortion)
+      </div>
+      <select id="cbtDistortion">
+        <option value="">اختر نوع التشويه المعرفي...</option>
+        <option value="التفكير بالكل أو لا شيء">التفكير بالكل أو لا شيء</option>
+        <option value="التعميم المفرط">التعميم المفرط</option>
+        <option value="التصفية الذهنية">التصفية الذهنية</option>
+        <option value="تجاهل الإيجابيات">تجاهل الإيجابيات</option>
+        <option value="القفز إلى الاستنتاجات">القفز إلى الاستنتاجات</option>
+        <option value="التضخيم أو التصغير">التضخيم أو التصغير</option>
+        <option value="الاستدلال العاطفي">الاستدلال العاطفي</option>
+        <option value="عبارات يجب">عبارات "يجب"</option>
+        <option value="الوسم">الوسم</option>
+        <option value="اللوم الشخصي">اللوم الشخصي</option>
+      </select>
+    </div>
+
+    <div class="cbt-section">
+      <div class="cbt-section-title">
+        <span class="section-num">4</span>
+        الفكرة البديلة (Alternative Thought)
+      </div>
+      <textarea id="cbtAlternative" placeholder="مثال: لقد تأخرت هذه المرة، لكن لديّ نجاحات سابقة"></textarea>
+      <button class="btn btn-secondary btn-sm mt-16" onclick="suggestAlternative()">
+        <i class="fas fa-lightbulb"></i> اقتراح فكرة بديلة
+      </button>
+    </div>
+
+    <div style="display:flex;gap:12px;margin-top:16px;">
+      <button class="btn btn-primary btn-block" onclick="saveCBT()">
+        <i class="fas fa-save"></i> حفظ التحليل
+      </button>
+      <button class="btn btn-secondary btn-block" onclick="App.navigate('results.html?aspect=5&overall=50')">
+        <i class="fas fa-arrow-left"></i> العودة للنتائج
+      </button>
+    </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="index.html"><i class="fas fa-home"></i><span>الرئيسية</span></a>
+    <a href="progress.html"><i class="fas fa-chart-line"></i><span>التقدم</span></a>
+    <a href="mood-check.html"><i class="fas fa-plus-circle"></i><span>تقييم جديد</span></a>
+    <a href="aspects.html" class="active"><i class="fas fa-dumbbell"></i><span>التمارين</span></a>
+    <a href="profile.html"><i class="fas fa-user"></i><span>الملف الشخصي</span></a>
+  </nav>
+
+  <script src="js/storage.js"></script>
+  <script src="js/questions.js"></script>
+  <script src="js/recommendations.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    const alternativeSuggestions = [
+      "ربما كان الموقف صعباً، لكن هذا لا يحدد قيمتي كشخص.",
+      "لديّ أدلة كثيرة على أنني قادر على النجاح رغم هذه العثرة.",
+      "كل إنسان يمر بلحظات صعبة، وهذا لا يعني أنني فاشل.",
+      "سأتعلم من هذا الموقف وأحاول بطريقة مختلفة في المرة القادمة.",
+      "الأمور ليست أبيض أو أسود، هناك درجات رمادية كثيرة."
+    ];
+
+    function suggestAlternative() {
+      const thought = document.getElementById('cbtThought').value.trim();
+      const suggestion = alternativeSuggestions[Math.floor(Math.random() * alternativeSuggestions.length)];
+      document.getElementById('cbtAlternative').value = thought
+        ? 'بالرغم من أن "' + thought + '"، إلا أن ' + suggestion
+        : suggestion;
+    }
+
+    function saveCBT() {
+      const event = document.getElementById('cbtEvent').value.trim();
+      const thought = document.getElementById('cbtThought').value.trim();
+      const distortion = document.getElementById('cbtDistortion').value;
+      const alternative = document.getElementById('cbtAlternative').value.trim();
+
+      if (!event || !thought || !distortion || !alternative) {
+        return;
+      }
+
+      Storage.saveCBTAnalysis({ event, thought, distortion, alternative });
+      App.navigate('progress.html');
+    }
+  </script>
+</body>
+</html>

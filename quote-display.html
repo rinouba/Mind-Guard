@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#5B8C85">
+  <title>Mind Guard - اقتباس تحفيزي</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="quote-screen">
+    <div class="quote-bg"></div>
+    <div class="quote-card fade-in">
+      <div class="quote-icon" style="font-size:3rem;margin-bottom:16px;">💭</div>
+      <div class="quote-text" id="quoteText">اعتنِ بجسدك، فهو المسكن الوحيد لروحك.</div>
+      <div class="quote-author" id="quoteAuthor" style="margin-bottom:24px;"></div>
+      <button class="btn btn-primary btn-lg btn-block" onclick="startAssessment()">ابدأ التقييم</button>
+    </div>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/questions.js"></script>
+  <script src="js/recommendations.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const aspect = parseInt(params.get('aspect')) || 1;
+
+    document.getElementById('quoteText').textContent = QUOTES[aspect] || 'اعتنِ بجسدك، فهو المسكن الوحيد لروحك.';
+
+    function startAssessment() {
+      App.navigate('questionnaire.html?aspect=' + aspect);
+    }
+  </script>
+</body>
+</html>

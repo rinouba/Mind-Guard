@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#5B8C85">
+  <title>Mind Guard - استرخاء العضلات</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="relaxation-screen">
+    <h1 class="page-title text-center">استرخاء العضلات التدريجي</h1>
+    <p class="page-subtitle text-center" style="margin-bottom:24px;">اتبع الخطوات بتركيز</p>
+
+    <div id="relaxSteps">
+      <div class="relax-step active" data-step="0">
+        <div class="relax-step-checkbox" id="check0">✓</div>
+        <div class="relax-step-text">اجلس أو استلقِ في مكان هادئ</div>
+      </div>
+      <div class="relax-step" data-step="1">
+        <div class="relax-step-checkbox" id="check1">✓</div>
+        <div class="relax-step-text">ابدأ من أصابع القدم: شد العضلات لمدة 5 ثوانٍ</div>
+      </div>
+      <div class="relax-step" data-step="2">
+        <div class="relax-step-checkbox" id="check2">✓</div>
+        <div class="relax-step-text">حرر التوتر فجأة ولاحظ الشعور بالاسترخاء</div>
+      </div>
+      <div class="relax-step" data-step="3">
+        <div class="relax-step-checkbox" id="check3">✓</div>
+        <div class="relax-step-text">انتقل إلى الساقين، ثم الفخذين، ثم البطن...</div>
+      </div>
+      <div class="relax-step" data-step="4">
+        <div class="relax-step-checkbox" id="check4">✓</div>
+        <div class="relax-step-text">استمر حتى تصل إلى الرأس والوجه</div>
+      </div>
+    </div>
+
+    <div class="relax-timer" id="relaxTimer">15</div>
+
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <button class="btn btn-primary" id="relaxStartBtn" onclick="startRelaxation()">ابدأ التمرين</button>
+      <button class="btn btn-secondary" id="relaxPauseBtn" onclick="togglePause()" style="display:none;">إيقاف مؤقت</button>
+      <button class="btn btn-secondary" id="relaxEndBtn" onclick="endRelaxation()" style="display:none;">إنهاء</button>
+    </div>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/questions.js"></script>
+  <script src="js/recommendations.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    let relaxInterval = null;
+    let currentRelaxStep = 0;
+    let relaxTimeLeft = 15;
+    let isPaused = false;
+
+    const stepDurations = [10, 15, 10, 15, 15];
+
+    function startRelaxation() {
+      document.getElementById('relaxStartBtn').style.display = 'none';
+      document.getElementById('relaxPauseBtn').style.display = 'block';
+      document.getElementById('relaxEndBtn').style.display = 'block';
+      currentRelaxStep = 0;
+      relaxTimeLeft = stepDurations[0];
+      updateRelaxStep();
+    }
+
+    function updateRelaxStep() {
+      document.querySelectorAll('.relax-step').forEach((el, i) => {
+        el.classList.remove('active', 'completed');
+        if (i < currentRelaxStep) el.classList.add('completed');
+        if (i === currentRelaxStep) el.classList.add('active');
+      });
+
+      const timerEl = document.getElementById('relaxTimer');
+      timerEl.textContent = relaxTimeLeft;
+
+      if (relaxInterval) clearInterval(relaxInterval);
+      relaxInterval = setInterval(() => {
+        if (isPaused) return;
+        relaxTimeLeft--;
+        timerEl.textContent = relaxTimeLeft;
+        if (relaxTimeLeft <= 0) {
+          document.getElementById(`check${currentRelaxStep}`).textContent = '✓';
+          currentRelaxStep++;
+          if (currentRelaxStep >= 5) {
+            endRelaxation();
+            return;
+          }
+          relaxTimeLeft = stepDurations[currentRelaxStep];
+          updateRelaxStep();
+        }
+      }, 1000);
+    }
+
+    function togglePause() {
+      isPaused = !isPaused;
+      document.getElementById('relaxPauseBtn').textContent = isPaused ? 'استئناف' : 'إيقاف مؤقت';
+    }
+
+    function endRelaxation() {
+      if (relaxInterval) clearInterval(relaxInterval);
+      document.getElementById('relaxTimer').textContent = 'أحسنت! 🎉';
+      document.getElementById('relaxPauseBtn').style.display = 'none';
+      document.getElementById('relaxEndBtn').style.display = 'none';
+      const params = new URLSearchParams(window.location.search);
+      const aspect = params.get('aspect') || 1;
+      setTimeout(() => App.navigate('results.html?aspect=' + aspect + '&overall=50'), 2000);
+    }
+  </script>
+</body>
+</html>

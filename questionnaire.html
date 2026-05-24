@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#5B8C85">
+  <title>Mind Guard - التقييم</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="questionnaire-header">
+    <div class="progress-bar-container">
+      <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+    </div>
+  </div>
+
+  <div class="page" style="padding-bottom:80px;">
+    <div class="question-container" id="questionContainer">
+      <div class="question-number" id="questionNumber"></div>
+      <div class="question-text" id="questionText"></div>
+      <div class="options-list" id="optionsList"></div>
+      <div class="nav-buttons">
+        <button class="btn btn-secondary" id="prevBtn" onclick="prevQuestion()">السابق</button>
+        <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">التالي</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/questions.js"></script>
+  <script src="js/recommendations.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const aspect = parseInt(params.get('aspect')) || 1;
+    const questions = App.getRandomQuestions(aspect, 3);
+    let currentIndex = 0;
+    let answers = [];
+
+    function renderQuestion() {
+      const q = questions[currentIndex];
+      const container = document.getElementById('questionContainer');
+      container.style.animation = 'none';
+      void container.offsetHeight;
+      container.style.animation = 'slideIn 0.35s cubic-bezier(0.4, 0, 0.2, 1)';
+      document.getElementById('questionNumber').textContent = `سؤال ${currentIndex + 1} من ${questions.length}`;
+      document.getElementById('questionText').textContent = q.text;
+      document.getElementById('progressBar').style.width = `${((currentIndex + 1) / questions.length) * 100}%`;
+
+      const optionsList = document.getElementById('optionsList');
+      optionsList.innerHTML = '';
+
+      q.options.forEach((opt, idx) => {
+        const saved = answers[currentIndex];
+        const isSelected = saved && saved.key === opt.key;
+        const btn = document.createElement('div');
+        btn.className = `option-btn${isSelected ? ' selected' : ''}`;
+        btn.setAttribute('role', 'button');
+        btn.setAttribute('tabindex', '0');
+        btn.onclick = () => selectOption(idx);
+        btn.onkeydown = (e) => { if (e.key === 'Enter') selectOption(idx); };
+        btn.innerHTML = `
+          <div class="option-key">${opt.key}</div>
+          <div class="option-text">${opt.text}</div>
+        `;
+        optionsList.appendChild(btn);
+      });
+
+      document.getElementById('prevBtn').style.display = currentIndex === 0 ? 'none' : 'block';
+      const nextBtn = document.getElementById('nextBtn');
+      if (currentIndex === questions.length - 1) {
+        nextBtn.textContent = 'عرض النتائج';
+      } else {
+        nextBtn.textContent = 'التالي';
+      }
+    }
+
+    function selectOption(index) {
+      const q = questions[currentIndex];
+      const option = q.options[index];
+      answers[currentIndex] = { questionId: q.id, key: option.key, points: option.points };
+
+      document.querySelectorAll('.option-btn').forEach((btn, i) => {
+        btn.classList.toggle('selected', i === index);
+      });
+    }
+
+    function nextQuestion() {
+      if (!answers[currentIndex]) {
+        return;
+      }
+      if (currentIndex === questions.length - 1) {
+        showResults();
+      } else {
+        currentIndex++;
+        renderQuestion();
+      }
+    }
+
+    function prevQuestion() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        renderQuestion();
+      }
+    }
+
+    function showResults() {
+      const score = App.calculateScore(aspect, answers);
+
+      const existingScores = Storage.get('tempScores') || {};
+      existingScores[aspect] = score;
+      Storage.set('tempScores', existingScores);
+
+      const aspectMap = { 1: 'physiological', 2: 'behavioral', 3: 'social', 4: 'emotional', 5: 'cognitive' };
+      const scores = {};
+      for (let i = 1; i <= 5; i++) {
+        scores[aspectMap[i]] = existingScores[i] || 0;
+      }
+
+      const lowest = App.findLowestAspect(scores);
+      Storage.saveAssessment(scores, lowest.key);
+      Storage.remove('tempScores');
+
+      App.navigate(`results.html?aspect=${lowest.index}&overall=${score}`);
+    }
+
+    renderQuestion();
+  </script>
+</body>
+</html>

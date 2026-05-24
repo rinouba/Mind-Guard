@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#5B8C85">
+  <title>Mind Guard - النتائج</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="page slide-up" style="padding-bottom:80px;">
+    <div class="results-header">
+      <div class="score-circle" id="scoreCircle" style="--pct: 0%;">
+        <div class="score-circle-inner">
+          <div class="score-value" id="scoreValue">0%</div>
+          <div class="score-label">نسبة العافية النفسية</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lowest-aspect-section" id="lowestSection">
+      <div class="lowest-aspect-header">
+        <span class="lowest-aspect-icon" id="lowestIcon">💪</span>
+        <span class="lowest-aspect-name" id="lowestName">الجانب الفيزيولوجي</span>
+        <span class="lowest-aspect-score" id="lowestScore">0%</span>
+      </div>
+      <div style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:12px;">توصيات مخصصة لك:</div>
+      <div id="recommendationsList"></div>
+    </div>
+
+    <div class="results-actions">
+      <button class="btn btn-primary btn-lg btn-block" id="exerciseBtn">ابدأ التمرين المناسب</button>
+      <button class="btn btn-secondary btn-lg btn-block" onclick="App.navigate('progress.html')">عرض التقدم</button>
+    </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="index.html"><i class="fas fa-home"></i><span>الرئيسية</span></a>
+    <a href="progress.html"><i class="fas fa-chart-line"></i><span>التقدم</span></a>
+    <a href="mood-check.html"><i class="fas fa-plus-circle"></i><span>تقييم جديد</span></a>
+    <a href="aspects.html"><i class="fas fa-dumbbell"></i><span>التمارين</span></a>
+    <a href="profile.html"><i class="fas fa-user"></i><span>الملف الشخصي</span></a>
+  </nav>
+
+  <script src="js/storage.js"></script>
+  <script src="js/questions.js"></script>
+  <script src="js/recommendations.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const lowestAspectIndex = parseInt(params.get('aspect')) || 1;
+    const overallScore = parseInt(params.get('overall')) || 0;
+
+    const rec = RECOMMENDATIONS[lowestAspectIndex];
+    document.getElementById('lowestIcon').textContent = ASPECT_ICONS[lowestAspectIndex] || '💪';
+    document.getElementById('lowestName').textContent = rec ? rec.name : 'الجانب الفيزيولوجي';
+    document.getElementById('lowestScore').textContent = overallScore + '%';
+
+    setTimeout(() => {
+      document.getElementById('scoreCircle').style.setProperty('--pct', overallScore + '%');
+    }, 200);
+    document.getElementById('scoreValue').textContent = overallScore + '%';
+
+    const list = document.getElementById('recommendationsList');
+    if (rec) {
+      rec.recommendations.forEach(r => {
+        const div = document.createElement('div');
+        div.className = 'recommendation-item';
+        div.textContent = r;
+        list.appendChild(div);
+      });
+    }
+
+    const exerciseBtn = document.getElementById('exerciseBtn');
+    if (rec) {
+      exerciseBtn.onclick = () => App.navigate(rec.exercise + '?aspect=' + lowestAspectIndex);
+    }
+  </script>
+</body>
+</html>
