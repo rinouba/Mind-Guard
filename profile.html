@@ -10,7 +10,12 @@
 <body>
   <div class="profile-screen">
     <div class="profile-header-card">
-      <div class="profile-avatar">🧑</div>
+      <div class="profile-avatar">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="14" r="7" stroke="white" stroke-width="2" fill="none"/>
+          <path d="M8 36c0-6.6 5.4-12 12-12s12 5.4 12 12" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
       <div class="profile-name">مستخدم Mind Guard</div>
       <div class="profile-stats" id="profileStats">شريكك في العناية النفسية</div>
     </div>
@@ -33,7 +38,7 @@
       </div>
       <div class="profile-menu-item" onclick="App.navigate('emotional-release.html')">
         <div class="profile-menu-icon"><i class="fas fa-book"></i></div>
-        <div class="profile-menu-text">اليوميات الشخصية</div>
+        <div class="profile-menu-text">تفريغ المشاعر</div>
         <span class="profile-menu-arrow"><i class="fas fa-chevron-left"></i></span>
       </div>
       <div class="profile-menu-item" onclick="App.navigate('cbt.html')">

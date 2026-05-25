@@ -7,24 +7,21 @@
   <meta name="theme-color" content="#5B8C85">
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512x512.png">
   <title>Mind Guard - حارس عقلك</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <div class="splash-screen">
     <div class="splash-logo">
-      <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M60 10C32.4 10 10 32.4 10 60s22.4 50 50 50 50-22.4 50-50S87.6 10 60 10z" fill="#5B8C85" opacity="0.15"/>
-        <path d="M60 20C38.4 20 20 38.4 20 60s18.4 40 40 40 40-18.4 40-40S81.6 20 60 20z" fill="#5B8C85" opacity="0.3"/>
-        <path d="M60 30C42.4 30 30 42.4 30 60s12.4 30 30 30 30-12.4 30-30S77.6 30 60 30z" fill="#5B8C85"/>
-        <path d="M60 40c-11 0-20 9-20 20s9 20 20 20 20-9 20-20-9-20-20-20z" fill="#A8D5BA"/>
-        <path d="M55 52l5-8 5 8-5 2-5-2z" fill="#fff"/>
-        <path d="M48 60h24M55 66l5 8 5-8" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        <path d="M35 25l12 4M85 25l-12 4M25 50l-8-5M25 70l-8 5M95 50l8-5M95 70l8 5" stroke="#A8D5BA" stroke-width="2" stroke-linecap="round"/>
-      </svg>
+      <img src="icons/logo.jpg" alt="Mind Guard" style="width:120px;height:120px;border-radius:20px;object-fit:cover;box-shadow:0 4px 20px rgba(91,140,133,0.2);">
     </div>
     <h1 class="splash-title">Mind Guard</h1>
-    <p class="splash-quote">حارس عقلك، شريكك في العناية النفسية.</p>
+    <p class="splash-quote">
+      「 مرحباً بك في مساحتك الآمنة <br>
+         حارس عقلك.. دليل سلامك | MindGuard 
+    </p>
     <button class="btn btn-primary btn-lg" onclick="App.navigate('mood-check.html')">ابدأ الرحلة</button>
   </div>
   <script src="js/storage.js"></script>

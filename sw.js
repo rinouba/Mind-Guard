@@ -23,6 +23,7 @@ const FILES_TO_CACHE = [
   '/manifest.json',
   '/icons/icon-192x192.png',
   '/icons/icon-512x512.png',
+  '/icons/logo.jpg',
   'https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css'
 ];
