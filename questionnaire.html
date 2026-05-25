@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <button class="lang-toggle-btn" onclick="i18n.toggle()">EN</button>
   <div class="questionnaire-header">
     <div class="progress-bar-container">
       <div class="progress-bar" id="progressBar" style="width: 0%"></div>
@@ -20,8 +21,8 @@
       <div class="question-text" id="questionText"></div>
       <div class="options-list" id="optionsList"></div>
       <div class="nav-buttons">
-        <button class="btn btn-secondary" id="prevBtn" onclick="prevQuestion()">السابق</button>
-        <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">التالي</button>
+        <button class="btn btn-secondary" id="prevBtn" onclick="prevQuestion()" data-i18n="questionnaire.prev">السابق</button>
+        <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" data-i18n="questionnaire.next">التالي</button>
       </div>
     </div>
   </div>
@@ -29,6 +30,7 @@
   <script src="js/storage.js"></script>
   <script src="js/questions.js"></script>
   <script src="js/recommendations.js"></script>
+  <script src="js/i18n.js"></script>
   <script src="js/app.js"></script>
   <script>
     const params = new URLSearchParams(window.location.search);
@@ -43,7 +45,7 @@
       container.style.animation = 'none';
       void container.offsetHeight;
       container.style.animation = 'slideIn 0.35s cubic-bezier(0.4, 0, 0.2, 1)';
-      document.getElementById('questionNumber').textContent = `سؤال ${currentIndex + 1} من ${questions.length}`;
+      document.getElementById('questionNumber').textContent = i18n.t('questionnaire.questionOf').replace('{n}', currentIndex + 1).replace('{total}', questions.length);
       document.getElementById('questionText').textContent = q.text;
       document.getElementById('progressBar').style.width = `${((currentIndex + 1) / questions.length) * 100}%`;
 
@@ -69,9 +71,9 @@
       document.getElementById('prevBtn').style.display = currentIndex === 0 ? 'none' : 'block';
       const nextBtn = document.getElementById('nextBtn');
       if (currentIndex === questions.length - 1) {
-        nextBtn.textContent = 'عرض النتائج';
+        nextBtn.textContent = i18n.t('questionnaire.showResults');
       } else {
-        nextBtn.textContent = 'التالي';
+        nextBtn.textContent = i18n.t('questionnaire.next');
       }
     }
 
@@ -114,14 +116,18 @@
       const aspectMap = { 1: 'physiological', 2: 'behavioral', 3: 'social', 4: 'emotional', 5: 'cognitive' };
       const scores = {};
       for (let i = 1; i <= 5; i++) {
-        scores[aspectMap[i]] = existingScores[i] || 0;
+        if (existingScores[i]) {
+          scores[aspectMap[i]] = existingScores[i];
+        }
       }
 
       const lowest = App.findLowestAspect(scores);
+      const avgScore = Math.round(Object.values(scores).reduce((s, v) => s + v, 0) / Object.keys(scores).length);
       Storage.saveAssessment(scores, lowest.key);
       Storage.remove('tempScores');
 
-      App.navigate(`results.html?aspect=${lowest.index}&overall=${score}`);
+      const overallParam = score || avgScore;
+      App.navigate(`results.html?aspect=${lowest.index}&overall=${overallParam}`);
     }
 
     renderQuestion();

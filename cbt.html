@@ -8,55 +8,56 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <button class="lang-toggle-btn" onclick="i18n.toggle()">EN</button>
   <div class="cbt-screen">
-    <h1 class="page-title text-center">🧠 تمرين إعادة الهيكلة المعرفية</h1>
-    <p class="page-subtitle text-center">حلل موقفك بثلاث خطوات علمية</p>
+    <h1 class="page-title text-center" data-i18n="cbt.title">🧠 تمرين إعادة الهيكلة المعرفية</h1>
+    <p class="page-subtitle text-center" data-i18n="cbt.subtitle">حلل موقفك بثلاث خطوات علمية</p>
 
     <div class="cbt-section scale-in">
       <div class="cbt-section-title">
         <span class="section-num">1</span>
-        الموقف الذي حدث وضايقك
+        <span data-i18n="cbt.step1Title">الموقف الذي حدث وضايقك</span>
       </div>
-      <p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:10px;">صف الموقف الذي سبب لك الانزعاج</p>
-      <textarea id="cptEvent" placeholder="مثال: مديري انتقد عملي أمام الزملاء" style="min-height:100px;"></textarea>
+      <p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:10px;" data-i18n="cbt.step1Desc">صف الموقف الذي سبب لك الانزعاج</p>
+      <textarea id="cptEvent" data-i18n-placeholder="cbt.step1Placeholder" placeholder="مثال: مديري انتقد عملي أمام الزملاء" style="min-height:100px;"></textarea>
     </div>
 
     <div class="cbt-section scale-in" style="animation-delay:0.1s;">
       <div class="cbt-section-title">
         <span class="section-num">2</span>
-        الفكرة السلبية التلقائية
+        <span data-i18n="cbt.step2Title">الفكرة السلبية التلقائية</span>
       </div>
-      <p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:10px;">ما الفكرة التي جاءت في ذهنك مباشرة بعد الموقف؟</p>
-      <textarea id="cptNegative" placeholder="مثال: أنا غير كفء ولن أنجح أبداً" style="min-height:100px;"></textarea>
+      <p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:10px;" data-i18n="cbt.step2Desc">ما الفكرة التي جاءت في ذهنك مباشرة بعد الموقف؟</p>
+      <textarea id="cptNegative" data-i18n-placeholder="cbt.step2Placeholder" placeholder="مثال: أنا غير كفء ولن أنجح أبداً" style="min-height:100px;"></textarea>
       <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;">
-        <span class="prompt-chip" onclick="addPromptCpt('cptNegative', 'أنا فاشل')">أنا فاشل</span>
-        <span class="prompt-chip" onclick="addPromptCpt('cptNegative', 'لا أحد يقدرني')">لا أحد يقدرني</span>
-        <span class="prompt-chip" onclick="addPromptCpt('cptNegative', 'كل شيء سيء')">كل شيء سيء</span>
-        <span class="prompt-chip" onclick="addPromptCpt('cptNegative', 'لن يتغير شيء')">لن يتغير شيء</span>
+        <span class="prompt-chip" onclick="addPromptCpt('cptNegative', i18n.lang==='en'?'I am a failure':'أنا فاشل')" data-i18n="cbt.chipFail">أنا فاشل</span>
+        <span class="prompt-chip" onclick="addPromptCpt('cptNegative', i18n.lang==='en'?'No one appreciates me':'لا أحد يقدرني')" data-i18n="cbt.chipAppreciate">لا أحد يقدرني</span>
+        <span class="prompt-chip" onclick="addPromptCpt('cptNegative', i18n.lang==='en'?'Everything is bad':'كل شيء سيء')" data-i18n="cbt.chipEverything">كل شيء سيء</span>
+        <span class="prompt-chip" onclick="addPromptCpt('cptNegative', i18n.lang==='en'?'Nothing will change':'لن يتغير شيء')" data-i18n="cbt.chipChange">لن يتغير شيء</span>
       </div>
     </div>
 
     <div class="cbt-section scale-in" style="animation-delay:0.2s;">
       <div class="cbt-section-title">
         <span class="section-num">3</span>
-        الفكرة البديلة الموضوعية الإيجابية
+        <span data-i18n="cbt.step3Title">الفكرة البديلة الموضوعية الإيجابية</span>
       </div>
-      <p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:10px;">فكر بطريقة أكثر توازناً وواقعية</p>
-      <textarea id="cptAlternative" placeholder="مثال: النقد يساعدني على التطور، ونجاحاتي السابقة تثبت كفاءتي" style="min-height:100px;"></textarea>
+      <p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:10px;" data-i18n="cbt.step3Desc">فكر بطريقة أكثر توازناً وواقعية</p>
+      <textarea id="cptAlternative" data-i18n-placeholder="cbt.step3Placeholder" placeholder="مثال: النقد يساعدني على التطور، ونجاحاتي السابقة تثبت كفاءتي" style="min-height:100px;"></textarea>
       <button class="btn btn-secondary btn-sm mt-8" onclick="suggestCptAlternative()">
-        <i class="fas fa-lightbulb"></i> اقتراح فكرة بديلة
+        <i class="fas fa-lightbulb"></i> <span data-i18n="cbt.suggestAlt">اقتراح فكرة بديلة</span>
       </button>
     </div>
 
     <div style="display:flex;gap:12px;margin-top:16px;margin-bottom:24px;">
       <button class="btn btn-primary btn-block btn-lg" onclick="saveCpt()">
-        <i class="fas fa-save"></i> حفظ التحليل
+        <i class="fas fa-save"></i> <span data-i18n="cbt.saveBtn">حفظ التحليل</span>
       </button>
     </div>
 
     <div id="historySection">
       <h3 style="display:flex;align-items:center;gap:8px;margin-bottom:16px;font-size:1.1rem;">
-        <i class="fas fa-clock-rotate"></i> التحليلات السابقة
+        <i class="fas fa-clock-rotate"></i> <span data-i18n="cbt.historyTitle">التحليلات السابقة</span>
       </h3>
       <div id="cptHistory"></div>
     </div>
@@ -65,19 +66,20 @@
   <div id="modalContainer"></div>
 
   <nav class="bottom-nav">
-    <a href="index.html"><i class="fas fa-home"></i><span>الرئيسية</span></a>
-    <a href="progress.html"><i class="fas fa-chart-line"></i><span>التقدم</span></a>
-    <a href="mood-check.html"><i class="fas fa-plus-circle"></i><span>تقييم جديد</span></a>
-    <a href="aspects.html" class="active"><i class="fas fa-dumbbell"></i><span>التمارين</span></a>
-    <a href="profile.html"><i class="fas fa-user"></i><span>الملف الشخصي</span></a>
+    <a href="index.html"><i class="fas fa-home"></i><span data-i18n="nav.home">الرئيسية</span></a>
+    <a href="progress.html"><i class="fas fa-chart-line"></i><span data-i18n="nav.progress">التقدم</span></a>
+    <a href="mood-check.html"><i class="fas fa-plus-circle"></i><span data-i18n="nav.newAssessment">تقييم جديد</span></a>
+    <a href="aspects.html" class="active"><i class="fas fa-dumbbell"></i><span data-i18n="nav.exercises">التمارين</span></a>
+    <a href="profile.html"><i class="fas fa-user"></i><span data-i18n="nav.profile">الملف الشخصي</span></a>
   </nav>
 
   <script src="js/storage.js"></script>
   <script src="js/questions.js"></script>
   <script src="js/recommendations.js"></script>
+  <script src="js/i18n.js"></script>
   <script src="js/app.js"></script>
   <script>
-    const altSuggestions = [
+    const altSuggestionsAr = [
       'ربما كان الموقف صعباً، لكن هذا لا يحدد قيمتي كشخص.',
       'لديّ أدلة كثيرة على أنني قادر على النجاح رغم هذه العثرة.',
       'كل إنسان يمر بلحظات صعبة، وهذا لا يعني أنني فاشل.',
@@ -86,6 +88,19 @@
       'هذه لحظة عابرة ولن تحدد مستقبلي كله.',
       'أنا أستحق التسامح، تماماً كما أسامح الآخرين.'
     ];
+    const altSuggestionsEn = [
+      'The situation may have been difficult, but it doesn\'t define my worth as a person.',
+      'I have plenty of evidence that I can succeed despite this setback.',
+      'Every person goes through hard moments; this doesn\'t make me a failure.',
+      'I will learn from this situation and try a different approach next time.',
+      'Things are not black or white; there are many shades of gray.',
+      'This is a passing moment and won\'t define my entire future.',
+      'I deserve forgiveness, just as I forgive others.'
+    ];
+
+    function getAltSuggestions() {
+      return i18n.lang === 'en' ? altSuggestionsEn : altSuggestionsAr;
+    }
 
     function addPromptCpt(id, text) {
       const ta = document.getElementById(id);
@@ -94,9 +109,13 @@
 
     function suggestCptAlternative() {
       const negative = document.getElementById('cptNegative').value.trim();
-      const suggestion = altSuggestions[Math.floor(Math.random() * altSuggestions.length)];
+      const suggestions = getAltSuggestions();
+      const suggestion = suggestions[Math.floor(Math.random() * suggestions.length)];
+      const prefix = i18n.lang === 'en'
+        ? 'It\'s true I felt "' + negative + '", but I realize that '
+        : 'صحيح أنني شعرت بـ "' + negative + '"، لكنني أدرك أن ';
       document.getElementById('cptAlternative').value = negative
-        ? 'صحيح أنني شعرت بـ "' + negative + '"، لكنني أدرك أن ' + suggestion
+        ? prefix + suggestion
         : suggestion;
     }
 
@@ -106,7 +125,10 @@
       const alternative = document.getElementById('cptAlternative').value.trim();
 
       if (!event || !negative || !alternative) {
-        showModal('📝', 'أكمل التحليل', 'يرجى ملء الحقول الثلاثة كاملة');
+        showModal(
+          '<svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="20" fill="rgba(91,140,133,0.08)"/><path d="M24 16v8M24 30v2" stroke="#7A8B87" stroke-width="2.5" stroke-linecap="round"/></svg>',
+          i18n.t('cbt.modalComplete'), i18n.t('cbt.modalCompleteMsg')
+        );
         return;
       }
 
@@ -124,7 +146,10 @@
       document.getElementById('cptNegative').value = '';
       document.getElementById('cptAlternative').value = '';
 
-      showModal('✅', 'تم الحفظ', 'تم حفظ تحليلك بنجاح.\nيمكنك العودة له لاحقاً من هذه الصفحة.');
+      showModal(
+        '<svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="20" fill="rgba(91,140,133,0.1)"/><path d="M16 24l6 6 10-10" stroke="#5B8C85" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+        i18n.t('cbt.modalSaved'), i18n.t('cbt.modalSavedMsg')
+      );
       renderHistory();
     }
 
@@ -132,7 +157,7 @@
       const container = document.getElementById('cptHistory');
       const records = Storage.getCBTRecords();
       if (records.length === 0) {
-        container.innerHTML = '<p style="color:var(--text-secondary);text-align:center;padding:20px;">لا توجد تحليلات سابقة</p>';
+        container.innerHTML = '<p style="color:var(--text-secondary);text-align:center;padding:20px;">' + i18n.t('cbt.noHistory') + '</p>';
         return;
       }
       container.innerHTML = '';
@@ -156,10 +181,13 @@
       const records = Storage.getCBTRecords();
       const r = records[index];
       if (!r) return;
+      const isEn = i18n.lang === 'en';
       showModal(
-        '🧠',
-        'تحليل CPT',
-        `📌 الموقف:\n${r.event}\n\n💭 الفكرة السلبية:\n${r.negativeThought}\n\n✨ الفكرة البديلة:\n${r.alternativeThought}`
+        '<svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="20" fill="rgba(91,140,133,0.08)"/><path d="M18 20c0 0 2-3 6-3s6 3 6 3" stroke="#5B8C85" stroke-width="2" stroke-linecap="round" fill="none"/></svg>',
+        isEn ? 'CPT Analysis' : 'تحليل CPT',
+        (isEn ? '📌 Situation:' : '📌 الموقف:') + '\n' + r.event + '\n\n' +
+        (isEn ? '💭 Negative Thought:' : '💭 الفكرة السلبية:') + '\n' + r.negativeThought + '\n\n' +
+        (isEn ? '✨ Alternative Thought:' : '✨ الفكرة البديلة:') + '\n' + r.alternativeThought
       );
     }
 
@@ -170,8 +198,8 @@
           <div class="modal-box" onclick="event.stopPropagation()">
             <span class="modal-icon">${icon}</span>
             <div class="modal-title">${title}</div>
-            <div class="modal-desc" style="white-space:pre-line;text-align:right;">${desc}</div>
-            <button class="btn btn-primary modal-btn" onclick="closeModal()">حسناً</button>
+            <div class="modal-desc" style="white-space:pre-line;text-align:${i18n.lang === 'en' ? 'left' : 'right'};">${desc}</div>
+            <button class="btn btn-primary modal-btn" onclick="closeModal()">${i18n.t('modal.ok')}</button>
           </div>
         </div>
       `;

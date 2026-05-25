@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="description" content="حارس عقلك - شريكك في العناية النفسية">
   <meta name="theme-color" content="#5B8C85">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="MindGuard">
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="icons/icon-192x192.png">
   <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192x192.png">
@@ -14,19 +17,21 @@
 </head>
 <body>
   <div class="splash-screen">
+    <button class="lang-toggle-btn" onclick="i18n.toggle()">EN</button>
     <div class="splash-logo">
       <img src="icons/logo.jpg" alt="Mind Guard" style="width:120px;height:120px;border-radius:20px;object-fit:cover;box-shadow:0 4px 20px rgba(91,140,133,0.2);">
     </div>
-    <h1 class="splash-title">Mind Guard</h1>
-    <p class="splash-quote">
+    <h1 class="splash-title" data-i18n="index.title">Mind Guard</h1>
+    <p class="splash-quote" data-i18n-html="index.subtitle">
       「 مرحباً بك في مساحتك الآمنة <br>
-         حارس عقلك.. دليل سلامك | MindGuard 
+         حارس عقلك.. دليل سلامك | MindGuard
     </p>
-    <button class="btn btn-primary btn-lg" onclick="App.navigate('mood-check.html')">ابدأ الرحلة</button>
+    <button class="btn btn-primary btn-lg" onclick="App.navigate('mood-check.html')" data-i18n="index.startBtn">ابدأ الرحلة</button>
   </div>
   <script src="js/storage.js"></script>
   <script src="js/questions.js"></script>
   <script src="js/recommendations.js"></script>
+  <script src="js/i18n.js"></script>
   <script src="js/app.js"></script>
   <script src="js/pwa.js"></script>
 </body>

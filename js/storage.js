@@ -89,7 +89,9 @@ const Storage = {
     const averages = {};
     let sum = 0, totalCount = 0;
     const keys = { 1: 'physiological', 2: 'behavioral', 3: 'social', 4: 'emotional', 5: 'cognitive' };
-    const arabicNames = { 1: 'الفيزيولوجي', 2: 'السلوكي', 3: 'الاجتماعي', 4: 'الانفعالي', 5: 'المعرفي' };
+    const enNames = { 1: 'Physiological', 2: 'Behavioral', 3: 'Social', 4: 'Emotional', 5: 'Cognitive' };
+    const arNames = { 1: 'الفيزيولوجي', 2: 'السلوكي', 3: 'الاجتماعي', 4: 'الانفعالي', 5: 'المعرفي' };
+    const useEn = typeof i18n !== 'undefined' && i18n.lang === 'en';
 
     for (let i = 1; i <= 5; i++) {
       if (counts[i] > 0) {
@@ -107,8 +109,8 @@ const Storage = {
     return {
       averages,
       overall: totalCount > 0 ? Math.round(sum / totalCount) : 0,
-      best: { key: bestKey, name: arabicNames[bestAspectIndex], value: averages[bestKey] },
-      worst: { key: worstKey, name: arabicNames[worstAspectIndex], value: averages[worstKey] }
+      best: { key: bestKey, name: useEn ? enNames[bestAspectIndex] : arNames[bestAspectIndex], value: averages[bestKey] },
+      worst: { key: worstKey, name: useEn ? enNames[worstAspectIndex] : arNames[worstAspectIndex], value: averages[worstKey] }
     };
   },
 
@@ -162,12 +164,11 @@ const Storage = {
   },
 
   clearAll() {
-    if (confirm('هل أنت متأكد من مسح جميع البيانات؟')) {
-      const keys = Object.keys(localStorage);
+    const msg = (typeof i18n !== 'undefined') ? i18n.t('confirm.clear') : 'هل أنت متأكد من مسح جميع البيانات؟';
+    if (confirm(msg)) {
+      const keys = ['assessments', 'lastAssessmentDate', 'tempScores', 'currentQuestions_1', 'currentQuestions_2', 'currentQuestions_3', 'currentQuestions_4', 'currentQuestions_5', 'userMood', 'journal', 'cbtRecords'];
       keys.forEach(k => {
-        if (k.startsWith('mindGuard_') || k === 'userMood' || k.startsWith('assessments') || k.startsWith('currentQuestions_') || k === 'lastAssessmentDate' || k === 'journal' || k === 'cbtRecords') {
-          localStorage.removeItem(k);
-        }
+        if (localStorage.getItem(k) !== null) localStorage.removeItem(k);
       });
       window.location.reload();
     }

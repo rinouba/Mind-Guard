@@ -1,24 +1,27 @@
 {
   "name": "Mind Guard - حارس عقلك",
   "short_name": "MindGuard",
-  "description": "تطبيق العناية بالصحة النفسية اليومية",
-  "start_url": "/index.html",
+  "description": "Your daily mental wellness companion",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#FAF9F6",
   "theme_color": "#5B8C85",
   "orientation": "portrait-primary",
   "lang": "ar",
   "dir": "rtl",
+  "scope": ".",
   "icons": [
     {
       "src": "icons/icon-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "icons/icon-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }

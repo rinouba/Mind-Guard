@@ -8,45 +8,47 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <button class="lang-toggle-btn" onclick="i18n.toggle()">EN</button>
   <div class="relaxation-screen">
-    <h1 class="page-title text-center">استرخاء العضلات التدريجي</h1>
-    <p class="page-subtitle text-center" style="margin-bottom:24px;">اتبع الخطوات بتركيز</p>
+    <h1 class="page-title text-center" data-i18n="relaxation.title">استرخاء العضلات التدريجي</h1>
+    <p class="page-subtitle text-center" style="margin-bottom:24px;" data-i18n="relaxation.subtitle">اتبع الخطوات بتركيز</p>
 
     <div id="relaxSteps">
       <div class="relax-step active" data-step="0">
         <div class="relax-step-checkbox" id="check0">✓</div>
-        <div class="relax-step-text">اجلس أو استلقِ في مكان هادئ</div>
+        <div class="relax-step-text" data-i18n="relaxation.step0">اجلس أو استلقِ في مكان هادئ</div>
       </div>
       <div class="relax-step" data-step="1">
         <div class="relax-step-checkbox" id="check1">✓</div>
-        <div class="relax-step-text">ابدأ من أصابع القدم: شد العضلات لمدة 5 ثوانٍ</div>
+        <div class="relax-step-text" data-i18n="relaxation.step1">ابدأ من أصابع القدم: شد العضلات لمدة 5 ثوانٍ</div>
       </div>
       <div class="relax-step" data-step="2">
         <div class="relax-step-checkbox" id="check2">✓</div>
-        <div class="relax-step-text">حرر التوتر فجأة ولاحظ الشعور بالاسترخاء</div>
+        <div class="relax-step-text" data-i18n="relaxation.step2">حرر التوتر فجأة ولاحظ الشعور بالاسترخاء</div>
       </div>
       <div class="relax-step" data-step="3">
         <div class="relax-step-checkbox" id="check3">✓</div>
-        <div class="relax-step-text">انتقل إلى الساقين، ثم الفخذين، ثم البطن...</div>
+        <div class="relax-step-text" data-i18n="relaxation.step3">انتقل إلى الساقين، ثم الفخذين، ثم البطن...</div>
       </div>
       <div class="relax-step" data-step="4">
         <div class="relax-step-checkbox" id="check4">✓</div>
-        <div class="relax-step-text">استمر حتى تصل إلى الرأس والوجه</div>
+        <div class="relax-step-text" data-i18n="relaxation.step4">استمر حتى تصل إلى الرأس والوجه</div>
       </div>
     </div>
 
     <div class="relax-timer" id="relaxTimer">15</div>
 
     <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-      <button class="btn btn-primary" id="relaxStartBtn" onclick="startRelaxation()">ابدأ التمرين</button>
-      <button class="btn btn-secondary" id="relaxPauseBtn" onclick="togglePause()" style="display:none;">إيقاف مؤقت</button>
-      <button class="btn btn-secondary" id="relaxEndBtn" onclick="endRelaxation()" style="display:none;">إنهاء</button>
+      <button class="btn btn-primary" id="relaxStartBtn" onclick="startRelaxation()"><span data-i18n="relaxation.startBtn">ابدأ التمرين</span></button>
+      <button class="btn btn-secondary" id="relaxPauseBtn" onclick="togglePause()" style="display:none;"><span data-i18n="relaxation.pauseBtn">إيقاف مؤقت</span></button>
+      <button class="btn btn-secondary" id="relaxEndBtn" onclick="endRelaxation()" style="display:none;"><span data-i18n="relaxation.endBtn">إنهاء</span></button>
     </div>
   </div>
 
   <script src="js/storage.js"></script>
   <script src="js/questions.js"></script>
   <script src="js/recommendations.js"></script>
+  <script src="js/i18n.js"></script>
   <script src="js/app.js"></script>
   <script>
     let relaxInterval = null;
@@ -95,12 +97,12 @@
 
     function togglePause() {
       isPaused = !isPaused;
-      document.getElementById('relaxPauseBtn').textContent = isPaused ? 'استئناف' : 'إيقاف مؤقت';
+      document.getElementById('relaxPauseBtn').querySelector('span').textContent = isPaused ? i18n.t('relaxation.resumeBtn') : i18n.t('relaxation.pauseBtn');
     }
 
     function endRelaxation() {
       if (relaxInterval) clearInterval(relaxInterval);
-      document.getElementById('relaxTimer').textContent = 'أحسنت! 🎉';
+      document.getElementById('relaxTimer').textContent = i18n.t('relaxation.wellDone') + ' 🎉';
       document.getElementById('relaxPauseBtn').style.display = 'none';
       document.getElementById('relaxEndBtn').style.display = 'none';
       const params = new URLSearchParams(window.location.search);

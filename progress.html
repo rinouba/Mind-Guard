@@ -9,9 +9,10 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 <body>
+  <button class="lang-toggle-btn" onclick="i18n.toggle()">EN</button>
   <div class="progress-screen">
-    <h1 class="page-title text-center">التقدم الأسبوعي</h1>
-    <p class="page-subtitle text-center">تتبع تطور حالتك النفسية</p>
+    <h1 class="page-title text-center" data-i18n="progress.title">التقدم الأسبوعي</h1>
+    <p class="page-subtitle text-center" data-i18n="progress.subtitle">تتبع تطور حالتك النفسية</p>
 
     <div class="chart-container">
       <canvas id="progressChart"></canvas>
@@ -20,130 +21,143 @@
     <div class="stat-grid" id="statsGrid">
       <div class="stat-card">
         <div class="stat-value" id="avgWellbeing">0%</div>
-        <div class="stat-label">متوسط العافية هذا الأسبوع</div>
+        <div class="stat-label" data-i18n="progress.avgWellbeing">متوسط العافية هذا الأسبوع</div>
       </div>
       <div class="stat-card">
         <div class="stat-value" id="bestAspect">-</div>
-        <div class="stat-label">أفضل جانب</div>
+        <div class="stat-label" data-i18n="progress.bestAspect">أفضل جانب</div>
       </div>
       <div class="stat-card">
         <div class="stat-value" id="worstAspect">-</div>
-        <div class="stat-label">الجانب الذي يحتاج تحسين</div>
+        <div class="stat-label" data-i18n="progress.worstAspect">الجانب الذي يحتاج تحسين</div>
       </div>
       <div class="stat-card">
         <div class="stat-value" id="totalAssessments">0</div>
-        <div class="stat-label">إجمالي التقييمات</div>
+        <div class="stat-label" data-i18n="progress.totalAssessments">إجمالي التقييمات</div>
       </div>
     </div>
 
     <div class="history-list" id="historyList">
-      <h3 style="margin-bottom:16px;font-size:1.1rem;">آخر التقييمات</h3>
+      <h3 style="margin-bottom:16px;font-size:1.1rem;" data-i18n="progress.lastAssessments">آخر التقييمات</h3>
       <div id="historyItems"></div>
     </div>
 
-    <div style="display:flex;gap:12px;margin-top:20px;padding-bottom:20px;">
+    <div class="progress-actions">
       <button class="btn btn-secondary btn-block" onclick="Storage.exportData()">
-        <i class="fas fa-download"></i> تصدير البيانات
+        <i class="fas fa-download"></i> <span data-i18n="progress.export">تصدير البيانات</span>
       </button>
-      <button class="btn btn-secondary btn-block" style="background:#F44336;color:white;" onclick="Storage.clearAll()">
-        <i class="fas fa-trash"></i> مسح جميع البيانات
+      <button class="btn btn-secondary btn-block btn-danger" onclick="Storage.clearAll()">
+        <i class="fas fa-trash"></i> <span data-i18n="progress.clear">مسح جميع البيانات</span>
       </button>
     </div>
   </div>
 
   <nav class="bottom-nav">
-    <a href="index.html"><i class="fas fa-home"></i><span>الرئيسية</span></a>
-    <a href="progress.html" class="active"><i class="fas fa-chart-line"></i><span>التقدم</span></a>
-    <a href="mood-check.html"><i class="fas fa-plus-circle"></i><span>تقييم جديد</span></a>
-    <a href="aspects.html"><i class="fas fa-dumbbell"></i><span>التمارين</span></a>
-    <a href="profile.html"><i class="fas fa-user"></i><span>الملف الشخصي</span></a>
+    <a href="index.html"><i class="fas fa-home"></i><span data-i18n="nav.home">الرئيسية</span></a>
+    <a href="progress.html" class="active"><i class="fas fa-chart-line"></i><span data-i18n="nav.progress">التقدم</span></a>
+    <a href="mood-check.html"><i class="fas fa-plus-circle"></i><span data-i18n="nav.newAssessment">تقييم جديد</span></a>
+    <a href="aspects.html"><i class="fas fa-dumbbell"></i><span data-i18n="nav.exercises">التمارين</span></a>
+    <a href="profile.html"><i class="fas fa-user"></i><span data-i18n="nav.profile">الملف الشخصي</span></a>
   </nav>
 
   <script src="js/storage.js"></script>
   <script src="js/questions.js"></script>
   <script src="js/recommendations.js"></script>
+  <script src="js/i18n.js"></script>
   <script src="js/app.js"></script>
   <script>
     const assessments = Storage.getAssessments();
     const lastWeek = assessments.filter(a => a.timestamp > Date.now() - 7 * 24 * 60 * 60 * 1000);
 
-    const labels = [];
-    const physioData = [];
-    const behavData = [];
-    const socialData = [];
-    const emotData = [];
-    const cognData = [];
+    function renderProgress() {
+      const isEn = i18n.lang === 'en';
+      const labels = [];
+      const physioData = [];
+      const behavData = [];
+      const socialData = [];
+      const emotData = [];
+      const cognData = [];
 
-    const aspectLabels = { physiological: 'فيزيولوجي', behavioral: 'سلوكي', social: 'اجتماعي', emotional: 'انفعالي', cognitive: 'معرفي' };
-    const aspectColors = { physiological: '#5B8C85', behavioral: '#E8A838', social: '#7B68EE', emotional: '#E8637A', cognitive: '#4A90D9' };
+      const aspectChartLabels = {
+        physiological: i18n.t('chart.physiological'),
+        behavioral: i18n.t('chart.behavioral'),
+        social: i18n.t('chart.social'),
+        emotional: i18n.t('chart.emotional'),
+        cognitive: i18n.t('chart.cognitive')
+      };
+      const aspectColors = { physiological: '#5B8C85', behavioral: '#E8A838', social: '#7B68EE', emotional: '#E8637A', cognitive: '#4A90D9' };
 
-    lastWeek.forEach(a => {
-      const d = new Date(a.timestamp);
-      labels.push(d.toLocaleDateString('ar-SA', { weekday: 'short', day: 'numeric' }));
-      physioData.push(a.scores.physiological || 0);
-      behavData.push(a.scores.behavioral || 0);
-      socialData.push(a.scores.social || 0);
-      emotData.push(a.scores.emotional || 0);
-      cognData.push(a.scores.cognitive || 0);
-    });
+      const locale = isEn ? 'en-US' : 'ar-SA';
+      lastWeek.forEach(a => {
+        const d = new Date(a.timestamp);
+        labels.push(d.toLocaleDateString(locale, { weekday: 'short', day: 'numeric' }));
+        physioData.push(a.scores.physiological || 0);
+        behavData.push(a.scores.behavioral || 0);
+        socialData.push(a.scores.social || 0);
+        emotData.push(a.scores.emotional || 0);
+        cognData.push(a.scores.cognitive || 0);
+      });
 
-    if (labels.length > 0) {
-      const ctx = document.getElementById('progressChart').getContext('2d');
-      new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: labels,
-          datasets: [
-            { label: 'فيزيولوجي', data: physioData, borderColor: '#5B8C85', backgroundColor: 'rgba(91,140,133,0.1)', tension: 0.3, fill: true },
-            { label: 'سلوكي', data: behavData, borderColor: '#E8A838', backgroundColor: 'rgba(232,168,56,0.1)', tension: 0.3, fill: true },
-            { label: 'اجتماعي', data: socialData, borderColor: '#7B68EE', backgroundColor: 'rgba(123,104,238,0.1)', tension: 0.3, fill: true },
-            { label: 'انفعالي', data: emotData, borderColor: '#E8637A', backgroundColor: 'rgba(232,99,122,0.1)', tension: 0.3, fill: true },
-            { label: 'معرفي', data: cognData, borderColor: '#4A90D9', backgroundColor: 'rgba(74,144,217,0.1)', tension: 0.3, fill: true }
-          ]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: { position: 'bottom', labels: { font: { family: 'Tajawal', size: 11 }, boxWidth: 12 } }
+      if (labels.length > 0) {
+        const ctx = document.getElementById('progressChart').getContext('2d');
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: labels,
+            datasets: [
+              { label: aspectChartLabels.physiological, data: physioData, borderColor: '#5B8C85', backgroundColor: 'rgba(91,140,133,0.1)', tension: 0.3, fill: true },
+              { label: aspectChartLabels.behavioral, data: behavData, borderColor: '#E8A838', backgroundColor: 'rgba(232,168,56,0.1)', tension: 0.3, fill: true },
+              { label: aspectChartLabels.social, data: socialData, borderColor: '#7B68EE', backgroundColor: 'rgba(123,104,238,0.1)', tension: 0.3, fill: true },
+              { label: aspectChartLabels.emotional, data: emotData, borderColor: '#E8637A', backgroundColor: 'rgba(232,99,122,0.1)', tension: 0.3, fill: true },
+              { label: aspectChartLabels.cognitive, data: cognData, borderColor: '#4A90D9', backgroundColor: 'rgba(74,144,217,0.1)', tension: 0.3, fill: true }
+            ]
           },
-          scales: {
-            y: { min: 0, max: 100, ticks: { font: { family: 'Tajawal' } } },
-            x: { ticks: { font: { family: 'Tajawal' } } }
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { position: 'bottom', labels: { font: { family: 'Tajawal', size: 11 }, boxWidth: 12 } }
+            },
+            scales: {
+              y: { min: 0, max: 100, ticks: { font: { family: 'Tajawal' } } },
+              x: { ticks: { font: { family: 'Tajawal' } } }
+            }
           }
-        }
-      });
+        });
+      }
+
+      const stats = Storage.getAverages();
+      if (stats) {
+        document.getElementById('avgWellbeing').textContent = stats.overall + '%';
+        document.getElementById('bestAspect').textContent = stats.best.name;
+        document.getElementById('worstAspect').textContent = stats.worst.name;
+      }
+      document.getElementById('totalAssessments').textContent = assessments.length;
+
+      const historyItems = document.getElementById('historyItems');
+      const recent = Storage.getRecentAssessments(10).reverse();
+      if (recent.length === 0) {
+        historyItems.innerHTML = '<p style="color:var(--text-secondary);text-align:center;">' + i18n.t('progress.noAssessments') + '</p>';
+      } else {
+        recent.forEach(a => {
+          const scores = a.scores;
+          const avg = Math.round(Object.values(scores).reduce((s, v) => s + v, 0) / Object.keys(scores).length);
+          const lowest = App.findLowestAspect(scores);
+          const item = document.createElement('div');
+          item.className = 'history-item';
+          item.innerHTML = `
+            <div>
+              <div class="history-date">${a.date}</div>
+              <div class="history-aspect">${isEn ? 'Lowest: ' : 'الأدنى: '}${lowest.name}</div>
+            </div>
+            <div class="history-percent" style="color:${App.getScoreColor(avg)}">${avg}%</div>
+          `;
+          historyItems.appendChild(item);
+        });
+      }
     }
 
-    const stats = Storage.getAverages();
-    if (stats) {
-      document.getElementById('avgWellbeing').textContent = stats.overall + '%';
-      document.getElementById('bestAspect').textContent = stats.best.name;
-      document.getElementById('worstAspect').textContent = stats.worst.name;
-    }
-    document.getElementById('totalAssessments').textContent = assessments.length;
-
-    const historyItems = document.getElementById('historyItems');
-    const recent = Storage.getRecentAssessments(10).reverse();
-    if (recent.length === 0) {
-      historyItems.innerHTML = '<p style="color:var(--text-secondary);text-align:center;">لا توجد تقييمات سابقة</p>';
-    } else {
-      recent.forEach(a => {
-        const scores = a.scores;
-        const avg = Math.round(Object.values(scores).reduce((s, v) => s + v, 0) / Object.keys(scores).length);
-        const lowest = App.findLowestAspect(scores);
-        const item = document.createElement('div');
-        item.className = 'history-item';
-        item.innerHTML = `
-          <div>
-            <div class="history-date">${a.date}</div>
-            <div class="history-aspect">الأدنى: ${lowest.name}</div>
-          </div>
-          <div class="history-percent" style="color:${App.getScoreColor(avg)}">${avg}%</div>
-        `;
-        historyItems.appendChild(item);
-      });
-    }
+    renderProgress();
   </script>
 </body>
 </html>

@@ -92,6 +92,69 @@ body {
 
 a { text-decoration: none; color: inherit; }
 
+/* Language Toggle */
+.lang-toggle-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 1001;
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
+  border-radius: var(--radius-pill);
+  padding: 6px 16px;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--primary);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-smooth);
+}
+.lang-toggle-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(91,140,133,0.15);
+}
+
+/* LTR English Support */
+html[dir="ltr"] body {
+  direction: ltr;
+  text-align: left;
+}
+html[dir="ltr"] .page-title,
+html[dir="ltr"] .page-subtitle,
+html[dir="ltr"] .text-center {
+  text-align: center;
+}
+html[dir="ltr"] .question-text,
+html[dir="ltr"] .option-text,
+html[dir="ltr"] .modal-title,
+html[dir="ltr"] .modal-desc,
+html[dir="ltr"] .history-item,
+html[dir="ltr"] .recommendation-item,
+html[dir="ltr"] .splash-quote {
+  text-align: left;
+}
+html[dir="ltr"] .bottom-nav a {
+  direction: ltr;
+}
+html[dir="ltr"] .profile-menu-item,
+html[dir="ltr"] .profile-menu-arrow {
+  direction: ltr;
+}
+html[dir="ltr"] .quote-text {
+  text-align: center;
+}
+html[dir="ltr"] .mood-selector,
+html[dir="ltr"] .aspect-grid {
+  direction: ltr;
+}
+html[dir="ltr"] .lang-toggle-btn {
+  left: auto;
+  right: 16px;
+}
+
 button {
   font-family: var(--font-body);
   cursor: pointer;
@@ -1261,6 +1324,27 @@ textarea {
   font-size: 0.85rem;
   color: var(--text-secondary);
   margin-top: 4px;
+}
+
+.progress-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  padding-bottom: 20px;
+}
+
+@media (max-width: 420px) {
+  .progress-actions {
+    flex-direction: column;
+  }
+}
+
+.btn-danger {
+  background: #F44336 !important;
+  color: white !important;
+}
+.btn-danger:hover {
+  background: #D32F2F !important;
 }
 
 .history-list {

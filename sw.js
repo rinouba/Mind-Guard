@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mind-guard-v1';
+const CACHE_NAME = 'mind-guard-v2';
 
 const FILES_TO_CACHE = [
   '/',
@@ -19,6 +19,7 @@ const FILES_TO_CACHE = [
   '/js/questions.js',
   '/js/recommendations.js',
   '/js/storage.js',
+  '/js/i18n.js',
   '/js/pwa.js',
   '/manifest.json',
   '/icons/icon-192x192.png',

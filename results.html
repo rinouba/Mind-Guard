@@ -8,43 +8,45 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <button class="lang-toggle-btn" onclick="i18n.toggle()">EN</button>
   <div class="page slide-up" style="padding-bottom:80px;">
     <div class="results-header">
       <div class="score-circle" id="scoreCircle" style="--pct: 0%;">
         <div class="score-circle-inner">
           <div class="score-value" id="scoreValue">0%</div>
-          <div class="score-label">نسبة العافية النفسية</div>
+          <div class="score-label" data-i18n="results.wellbeingLabel">نسبة العافية النفسية</div>
         </div>
       </div>
     </div>
 
     <div class="lowest-aspect-section" id="lowestSection">
       <div class="lowest-aspect-header">
-        <span class="lowest-aspect-icon" id="lowestIcon">💪</span>
+        <span class="lowest-aspect-icon" id="lowestIcon"></span>
         <span class="lowest-aspect-name" id="lowestName">الجانب الفيزيولوجي</span>
         <span class="lowest-aspect-score" id="lowestScore">0%</span>
       </div>
-      <div style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:12px;">توصيات مخصصة لك:</div>
+      <div style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:12px;" data-i18n="results.recommendationsHeader">توصيات مخصصة لك:</div>
       <div id="recommendationsList"></div>
     </div>
 
     <div class="results-actions">
-      <button class="btn btn-primary btn-lg btn-block" id="exerciseBtn">ابدأ التمرين المناسب</button>
-      <button class="btn btn-secondary btn-lg btn-block" onclick="App.navigate('progress.html')">عرض التقدم</button>
+      <button class="btn btn-primary btn-lg btn-block" id="exerciseBtn" data-i18n="results.exerciseBtn">ابدأ التمرين المناسب</button>
+      <button class="btn btn-secondary btn-lg btn-block" onclick="App.navigate('progress.html')" data-i18n="results.showProgress">عرض التقدم</button>
     </div>
   </div>
 
   <nav class="bottom-nav">
-    <a href="index.html"><i class="fas fa-home"></i><span>الرئيسية</span></a>
-    <a href="progress.html"><i class="fas fa-chart-line"></i><span>التقدم</span></a>
-    <a href="mood-check.html"><i class="fas fa-plus-circle"></i><span>تقييم جديد</span></a>
-    <a href="aspects.html"><i class="fas fa-dumbbell"></i><span>التمارين</span></a>
-    <a href="profile.html"><i class="fas fa-user"></i><span>الملف الشخصي</span></a>
+    <a href="index.html"><i class="fas fa-home"></i><span data-i18n="nav.home">الرئيسية</span></a>
+    <a href="progress.html"><i class="fas fa-chart-line"></i><span data-i18n="nav.progress">التقدم</span></a>
+    <a href="mood-check.html"><i class="fas fa-plus-circle"></i><span data-i18n="nav.newAssessment">تقييم جديد</span></a>
+    <a href="aspects.html"><i class="fas fa-dumbbell"></i><span data-i18n="nav.exercises">التمارين</span></a>
+    <a href="profile.html"><i class="fas fa-user"></i><span data-i18n="nav.profile">الملف الشخصي</span></a>
   </nav>
 
   <script src="js/storage.js"></script>
   <script src="js/questions.js"></script>
   <script src="js/recommendations.js"></script>
+  <script src="js/i18n.js"></script>
   <script src="js/app.js"></script>
   <script>
     const params = new URLSearchParams(window.location.search);
@@ -58,30 +60,35 @@
       4: '<svg width="40" height="40" viewBox="0 0 52 52" fill="none"><circle cx="26" cy="26" r="24" fill="#F5F0E8"/><path d="M26 38s-10-6-10-13c0-3.3 2.7-6 6-6 2 0 3.8 1 4.9 2.5" stroke="#5B8C85" stroke-width="1.8" stroke-linecap="round" fill="none"/><path d="M26 38s10-6 10-13c0-3.3-2.7-6-6-6-2 0-3.8 1-4.9 2.5" stroke="#5B8C85" stroke-width="1.8" stroke-linecap="round" fill="rgba(91,140,133,0.08)"/></svg>',
       5: '<svg width="40" height="40" viewBox="0 0 52 52" fill="none"><circle cx="26" cy="26" r="24" fill="#F5F0E8"/><path d="M18 30c0 4.4 3.6 8 8 8s8-3.6 8-8v-4c0-3.3-2.7-6-6-6h-4c-3.3 0-6 2.7-6 6v4z" stroke="#5B8C85" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="rgba(91,140,133,0.08)"/></svg>'
     };
-    const rec = RECOMMENDATIONS[lowestAspectIndex];
-    document.getElementById('lowestIcon').innerHTML = aspectSvgs[lowestAspectIndex] || '';
-    document.getElementById('lowestName').textContent = rec ? rec.name : 'الجانب الفيزيولوجي';
-    document.getElementById('lowestScore').textContent = overallScore + '%';
 
-    setTimeout(() => {
-      document.getElementById('scoreCircle').style.setProperty('--pct', overallScore + '%');
-    }, 200);
-    document.getElementById('scoreValue').textContent = overallScore + '%';
+    function renderResults() {
+      const rec = RECOMMENDATIONS[lowestAspectIndex];
+      document.getElementById('lowestIcon').innerHTML = aspectSvgs[lowestAspectIndex] || '';
+      document.getElementById('lowestName').textContent = i18n.getAspectName(lowestAspectIndex);
+      document.getElementById('lowestScore').textContent = overallScore + '%';
 
-    const list = document.getElementById('recommendationsList');
-    if (rec) {
-      rec.recommendations.forEach(r => {
+      setTimeout(() => {
+        document.getElementById('scoreCircle').style.setProperty('--pct', overallScore + '%');
+      }, 200);
+      document.getElementById('scoreValue').textContent = overallScore + '%';
+
+      const list = document.getElementById('recommendationsList');
+      list.innerHTML = '';
+      const recs = i18n.getRecommendations(lowestAspectIndex);
+      recs.forEach(r => {
         const div = document.createElement('div');
         div.className = 'recommendation-item';
         div.textContent = r;
         list.appendChild(div);
       });
+
+      const exerciseBtn = document.getElementById('exerciseBtn');
+      if (rec) {
+        exerciseBtn.onclick = () => App.navigate(rec.exercise + '?aspect=' + lowestAspectIndex);
+      }
     }
 
-    const exerciseBtn = document.getElementById('exerciseBtn');
-    if (rec) {
-      exerciseBtn.onclick = () => App.navigate(rec.exercise + '?aspect=' + lowestAspectIndex);
-    }
+    renderResults();
   </script>
 </body>
 </html>

@@ -7,7 +7,8 @@ const App = {
     const cached = Storage.getCurrentQuestions(aspectNumber);
     if (cached) return cached;
 
-    const aspect = QUESTIONS[aspectNumber];
+    const source = (typeof i18n !== 'undefined' && i18n.lang === 'en') ? QUESTIONS_EN : QUESTIONS;
+    const aspect = source[aspectNumber];
     if (!aspect) return [];
 
     const shuffled = [...aspect.questions].sort(() => Math.random() - 0.5);
@@ -36,10 +37,15 @@ const App = {
     let lowestValue = 101;
 
     for (const [key, value] of Object.entries(scores)) {
-      if (value < lowestValue) {
+      if (value > 0 && value < lowestValue) {
         lowestValue = value;
         lowestKey = key;
       }
+    }
+
+    if (!lowestKey) {
+      lowestKey = Object.keys(scores)[0];
+      lowestValue = scores[lowestKey];
     }
 
     return {
@@ -68,13 +74,9 @@ const App = {
   },
 
   getMoodText(mood) {
-    const map = {
-      'excellent': 'ممتاز',
-      'good': 'جيد',
-      'neutral': 'متوسط',
-      'bad': 'سيء',
-      'very_bad': 'سيء جداً'
-    };
+    const ar = { 'excellent': 'ممتاز', 'good': 'جيد', 'neutral': 'متوسط', 'bad': 'سيء', 'very_bad': 'سيء جداً' };
+    const en = { 'excellent': 'Excellent', 'good': 'Good', 'neutral': 'Neutral', 'bad': 'Bad', 'very_bad': 'Very Bad' };
+    const map = (typeof i18n !== 'undefined' && i18n.lang === 'en') ? en : ar;
     return map[mood] || '';
   },
 

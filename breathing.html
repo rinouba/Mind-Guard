@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <button class="lang-toggle-btn" onclick="i18n.toggle()">EN</button>
   <div class="breathing-screen" id="breathingScreen">
     <div class="breathing-circle" id="breathingCircle">
       <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
@@ -16,41 +17,55 @@
     </div>
     <div class="breathing-instruction" id="breathingInstruction">تنفس ببطء من الأنف</div>
     <div class="breathing-counter" id="breathingCounter">الدورة 1 من 4</div>
-    <button class="btn btn-primary btn-lg" id="breathingEndBtn" onclick="endBreathing()" style="display:none;">إنهاء التمرين</button>
-    <button class="btn btn-secondary" id="breathingStartBtn" onclick="startBreathing()">ابدأ التمرين</button>
+    <button class="btn btn-primary btn-lg" id="breathingEndBtn" onclick="endBreathing()" style="display:none;"><span data-i18n="breathing.endBtn">إنهاء التمرين</span></button>
+    <button class="btn btn-secondary" id="breathingStartBtn" onclick="startBreathing()"><span data-i18n="breathing.startBtn">ابدأ التمرين</span></button>
   </div>
 
   <script src="js/storage.js"></script>
   <script src="js/questions.js"></script>
   <script src="js/recommendations.js"></script>
+  <script src="js/i18n.js"></script>
   <script src="js/app.js"></script>
   <script>
     let breathingInterval = null;
     let currentPhase = 0;
     let currentCycle = 0;
-    const phases = [
-      { text: 'تنفس ببطء من الأنف', css: 'inhale', duration: 4000 },
-      { text: 'احبس النفس', css: 'hold', duration: 4000 },
-      { text: 'أخرج الهواء ببطء', css: 'exhale', duration: 4000 },
-      { text: 'احبس النفس', css: 'hold', duration: 4000 }
-    ];
+
+    function getPhases() {
+      if (i18n.lang === 'en') {
+        return [
+          { text: 'Breathe in slowly through your nose', css: 'inhale', duration: 4000 },
+          { text: 'Hold your breath', css: 'hold', duration: 4000 },
+          { text: 'Exhale slowly', css: 'exhale', duration: 4000 },
+          { text: 'Hold your breath', css: 'hold', duration: 4000 }
+        ];
+      }
+      return [
+        { text: 'تنفس ببطء من الأنف', css: 'inhale', duration: 4000 },
+        { text: 'احبس النفس', css: 'hold', duration: 4000 },
+        { text: 'أخرج الهواء ببطء', css: 'exhale', duration: 4000 },
+        { text: 'احبس النفس', css: 'hold', duration: 4000 }
+      ];
+    }
     const totalCycles = 4;
 
     function startBreathing() {
       document.getElementById('breathingStartBtn').style.display = 'none';
+      document.getElementById('breathingEndBtn').style.display = 'block';
       currentCycle = 1;
       currentPhase = 0;
       runPhase();
     }
 
     function runPhase() {
+      const phases = getPhases();
       const phase = phases[currentPhase];
       const circle = document.getElementById('breathingCircle');
       const instruction = document.getElementById('breathingInstruction');
 
       circle.className = 'breathing-circle ' + phase.css;
       instruction.textContent = phase.text;
-      document.getElementById('breathingCounter').textContent = `الدورة ${currentCycle} من ${totalCycles}`;
+      document.getElementById('breathingCounter').textContent = i18n.t('breathing.cycle').replace('{n}', currentCycle).replace('{total}', totalCycles);
 
       if (breathingInterval) clearTimeout(breathingInterval);
       breathingInterval = setTimeout(() => {
@@ -69,7 +84,7 @@
 
     function endBreathing() {
       if (breathingInterval) clearTimeout(breathingInterval);
-      document.getElementById('breathingInstruction').textContent = 'أحسنت! 🎉 لقد أكملت التمرين';
+      document.getElementById('breathingInstruction').textContent = i18n.t('breathing.wellDone');
       document.getElementById('breathingCounter').textContent = '';
       document.getElementById('breathingCircle').className = 'breathing-circle';
       document.getElementById('breathingEndBtn').style.display = 'none';
