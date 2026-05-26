@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#5B8C85">
+  <title>Mind Guard - الباقات</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .pricing-page {
+      min-height: 100vh;
+      padding: 40px 20px 100px;
+      position: relative;
+    }
+
+    .pricing-title {
+      text-align: center;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+      animation: fadeIn 0.6s ease both;
+    }
+
+    .pricing-subtitle {
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      animation: fadeIn 0.6s ease 0.1s both;
+    }
+
+    .pricing-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .pricing-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-card);
+      box-shadow: var(--card-shadow);
+      padding: var(--padding-card);
+      transition: transform var(--duration-fast) var(--ease-smooth),
+                  box-shadow var(--duration-fast) var(--ease-smooth);
+      animation: cardEntrance 0.5s var(--ease-smooth) both;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pricing-card:first-of-type { animation-delay: 0.1s; }
+    .pricing-card:last-of-type { animation-delay: 0.25s; }
+
+    .pricing-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card-hover);
+    }
+
+    .pricing-card.premium {
+      border-color: rgba(232, 168, 56, 0.3);
+      background: linear-gradient(135deg, rgba(255,255,255,0.85), rgba(245,240,232,0.9));
+    }
+
+    .pricing-card.premium::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #E8A838, #D4A04A);
+      opacity: 0.6;
+    }
+
+    .pricing-badge {
+      display: inline-block;
+      background: var(--gradient-primary);
+      color: white;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .pricing-card.premium .pricing-badge {
+      background: linear-gradient(135deg, #E8A838, #D4A04A);
+    }
+
+    .pricing-header {
+      margin-bottom: 16px;
+    }
+
+    .pricing-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .pricing-price {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--primary);
+      direction: ltr;
+      text-align: right;
+    }
+
+    .pricing-card.premium .pricing-price {
+      color: #B8860B;
+    }
+
+    .pricing-price span {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--text-secondary);
+    }
+
+    .pricing-features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 20px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .pricing-features li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .pricing-features li:last-child {
+      border-bottom: none;
+    }
+
+    .pricing-features li i {
+      width: 18px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .pricing-card.premium .pricing-features li i {
+      color: #E8A838;
+    }
+
+    .pricing-card.premium .pricing-features li .fa-check-circle {
+      color: #4CAF50;
+    }
+
+    .pricing-card .pricing-features li .fa-check-circle {
+      color: #4CAF50;
+    }
+
+    .pricing-btn {
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: var(--radius-pill);
+      font-size: 0.95rem;
+      font-weight: 600;
+      font-family: var(--font-body);
+      cursor: default;
+      border: none;
+      transition: all var(--duration-fast) var(--ease-smooth);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .pricing-btn:disabled {
+      cursor: default;
+      opacity: 0.7;
+    }
+
+    .pricing-btn-free {
+      background: var(--warm-beige);
+      color: var(--text-secondary);
+    }
+
+    .pricing-btn-premium {
+      background: transparent;
+      color: #B8860B;
+      border: 2px solid rgba(232, 168, 56, 0.4);
+    }
+
+    .pricing-divider {
+      text-align: center;
+      position: relative;
+      margin: 4px 0;
+      animation: fadeIn 0.6s ease 0.18s both;
+    }
+
+    .pricing-divider span {
+      display: inline-block;
+      background: var(--secondary-mint);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 4px 18px;
+      border-radius: var(--radius-pill);
+      letter-spacing: 0.5px;
+    }
+
+    .pricing-note {
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      margin-top: 24px;
+      animation: fadeIn 0.6s ease 0.35s both;
+    }
+
+    .pricing-note i {
+      color: var(--primary);
+      margin-left: 6px;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(8px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <button class="lang-toggle-btn" onclick="i18n.toggle()">EN</button>
+  <div class="pricing-page blob-bg">
+    <div style="position:relative;z-index:1;">
+      <h1 class="pricing-title" data-i18n="pricing.title">اختر باقتك</h1>
+      <p class="pricing-subtitle" data-i18n="pricing.subtitle">ابدأ مجاناً، وطوّر رحلتك النفسية متى احتجت</p>
+
+      <div class="pricing-grid">
+
+        <div class="pricing-card">
+          <div class="pricing-header">
+            <div class="pricing-name" data-i18n="pricing.freeName">الخطة المجانية</div>
+            <div class="pricing-price" data-i18n="pricing.freePrice">مجاناً</div>
+          </div>
+
+          <ul class="pricing-features">
+            <li><i class="fas fa-check-circle"></i> <span data-i18n="pricing.feature1">تقييم نفسي يومي</span></li>
+            <li><i class="fas fa-check-circle"></i> <span data-i18n="pricing.feature2">3 تمارين تفاعلية</span></li>
+            <li><i class="fas fa-check-circle"></i> <span data-i18n="pricing.feature3">تخزين بيانات محلي</span></li>
+          </ul>
+
+          <button class="pricing-btn pricing-btn-free" disabled>
+            <i class="fas fa-check"></i> <span data-i18n="pricing.freeBtn">خطتك الحالية</span>
+          </button>
+        </div>
+
+        <div class="pricing-divider"><span data-i18n="pricing.bestValue">الأفضل</span></div>
+
+        <div class="pricing-card premium">
+          <div class="pricing-header">
+            <div class="pricing-badge">Premium</div>
+            <div class="pricing-name" data-i18n="pricing.premiumName">Mind Guard Premium</div>
+            <div class="pricing-price">499 <span data-i18n="pricing.premiumPrice">دج/شهرياً</span></div>
+          </div>
+
+          <ul class="pricing-features">
+            <li><i class="fas fa-check-circle"></i> <span data-i18n="pricing.premiumFeature1">كل ميزات المجانية</span></li>
+            <li><i class="fas fa-star"></i> <span data-i18n="pricing.premiumFeature2">تقارير أسبوعية مفصلة</span></li>
+            <li><i class="fas fa-star"></i> <span data-i18n="pricing.premiumFeature3">تمارين حصرية إضافية</span></li>
+            <li><i class="fas fa-cloud-upload-alt"></i> <span data-i18n="pricing.premiumFeature4">مزامنة سحابية</span></li>
+          </ul>
+
+          <button class="pricing-btn pricing-btn-premium" disabled>
+            <span data-i18n="pricing.premiumBtn">قريباً 🔜</span>
+          </button>
+        </div>
+
+      </div>
+
+      <p class="pricing-note">
+        <i class="fas fa-shield-alt"></i> <span data-i18n="pricing.note">بياناتك آمنة ومشفرة. يمكنك الترقية في أي وقت.</span>
+      </p>
+    </div>
+  </div>
+
+  <script src="js/i18n.js"></script>
+  <nav class="bottom-nav">
+    <a href="index.html"><i class="fas fa-home"></i><span data-i18n="nav.home">الرئيسية</span></a>
+    <a href="pricing.html" class="active"><i class="fas fa-crown"></i><span data-i18n="pricing.nav">الباقات</span></a>
+    <a href="aspects.html"><i class="fas fa-dumbbell"></i><span data-i18n="nav.exercises">التمارين</span></a>
+    <a href="progress.html"><i class="fas fa-chart-line"></i><span data-i18n="nav.progress">التقدم</span></a>
+    <a href="profile.html"><i class="fas fa-user"></i><span data-i18n="nav.profile">الملف الشخصي</span></a>
+  </nav>
+</body>
+</html>

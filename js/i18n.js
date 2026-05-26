@@ -566,6 +566,7 @@ i18n.translations = {
   'profile.menuExercises': { ar: 'التمارين التفاعلية', en: 'Interactive Exercises' },
   'profile.menuEmotional': { ar: 'تفريغ المشاعر', en: 'Emotional Release' },
   'profile.menuCbt': { ar: 'تحليل الأفكار (CPT)', en: 'Thought Analysis (CBT)' },
+  'profile.menuPricing': { ar: 'الباقات', en: 'Packages' },
   'profile.menuExport': { ar: 'تصدير البيانات', en: 'Export Data' },
   'profile.menuClear': { ar: 'مسح جميع البيانات', en: 'Clear All Data' },
 
@@ -589,12 +590,33 @@ i18n.translations = {
   'chart.behavioral': { ar: 'سلوكي', en: 'Behavioral' },
   'chart.social': { ar: 'اجتماعي', en: 'Social' },
   'chart.emotional': { ar: 'انفعالي', en: 'Emotional' },
-  'chart.cognitive': { ar: 'معرفي', en: 'Cognitive' }
+  'chart.cognitive': { ar: 'معرفي', en: 'Cognitive' },
+
+  'pricing.title': { ar: 'اختر باقتك', en: 'Choose Your Plan' },
+  'pricing.subtitle': { ar: 'ابدأ مجاناً، وطوّر رحلتك النفسية متى احتجت', en: 'Start free, upgrade your wellness journey anytime' },
+  'pricing.freeName': { ar: 'الخطة المجانية', en: 'Free Plan' },
+  'pricing.freePrice': { ar: 'مجاناً', en: 'Free' },
+  'pricing.feature1': { ar: 'تقييم نفسي يومي', en: 'Daily psychological assessment' },
+  'pricing.feature2': { ar: '3 تمارين تفاعلية', en: '3 interactive exercises' },
+  'pricing.feature3': { ar: 'تخزين بيانات محلي', en: 'Local data storage' },
+  'pricing.freeBtn': { ar: 'خطتك الحالية', en: 'Your Current Plan' },
+  'pricing.bestValue': { ar: 'الأفضل', en: 'Best Value' },
+  'pricing.premiumName': { ar: 'Mind Guard Premium', en: 'Mind Guard Premium' },
+  'pricing.premiumPrice': { ar: '499 دج/شهرياً', en: '499 DZD/month' },
+  'pricing.premiumFeature1': { ar: 'كل ميزات المجانية', en: 'All free features' },
+  'pricing.premiumFeature2': { ar: 'تقارير أسبوعية مفصلة', en: 'Detailed weekly reports' },
+  'pricing.premiumFeature3': { ar: 'تمارين حصرية إضافية', en: 'Exclusive additional exercises' },
+  'pricing.premiumFeature4': { ar: 'مزامنة سحابية', en: 'Cloud sync' },
+  'pricing.premiumBtn': { ar: 'قريباً 🔜', en: 'Coming Soon 🔜' },
+  'pricing.nav': { ar: 'الباقات', en: 'Pricing' },
+  'pricing.note': { ar: 'بياناتك آمنة ومشفرة. يمكنك الترقية في أي وقت.', en: 'Your data is safe and encrypted. Upgrade anytime.' }
 };
 
 i18n.lang = localStorage.getItem('mindGuard_lang') || 'ar';
-document.documentElement.lang = i18n.lang;
-document.documentElement.dir = i18n.lang === 'ar' ? 'rtl' : 'ltr';
-document.documentElement.classList.toggle('lang-en', i18n.lang === 'en');
-document.documentElement.classList.toggle('lang-ar', i18n.lang === 'ar');
+if (!document.documentElement.hasAttribute('data-force-rtl')) {
+  document.documentElement.lang = i18n.lang;
+  document.documentElement.dir = i18n.lang === 'ar' ? 'rtl' : 'ltr';
+  document.documentElement.classList.toggle('lang-en', i18n.lang === 'en');
+  document.documentElement.classList.toggle('lang-ar', i18n.lang === 'ar');
+}
 document.addEventListener('DOMContentLoaded', () => { i18n.init(); });
