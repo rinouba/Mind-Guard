@@ -607,9 +607,36 @@ i18n.translations = {
   'pricing.premiumFeature2': { ar: 'تقارير أسبوعية مفصلة', en: 'Detailed weekly reports' },
   'pricing.premiumFeature3': { ar: 'تمارين حصرية إضافية', en: 'Exclusive additional exercises' },
   'pricing.premiumFeature4': { ar: 'مزامنة سحابية', en: 'Cloud sync' },
-  'pricing.premiumBtn': { ar: 'قريباً 🔜', en: 'Coming Soon 🔜' },
+  'pricing.premiumBtn': { ar: 'قريباً', en: 'Coming Soon' },
   'pricing.nav': { ar: 'الباقات', en: 'Pricing' },
-  'pricing.note': { ar: 'بياناتك آمنة ومشفرة. يمكنك الترقية في أي وقت.', en: 'Your data is safe and encrypted. Upgrade anytime.' }
+  'pricing.note': { ar: 'بياناتك آمنة ومشفرة. يمكنك الترقية في أي وقت.', en: 'Your data is safe and encrypted. Upgrade anytime.' },
+
+  'hero.title': { ar: 'منصة MindGuard <br><span>المنصة الرقمية لتحليل المؤشرات السلوكية والتنبؤ باضطرابات القلق، الاكتئاب، والإجهاد النفسي</span>', en: 'MindGuard Platform <br><span>Digital analysis of behavioral indicators &amp; prediction of anxiety, depression, and psychological stress.</span>' },
+  'hero.subtitle': { ar: 'نظام رصد خماسي الأبعاد (معرفي، سلوكي، انفعالي، اجتماعي، وفيزيولوجي) يعتمد على التقييم الذاتي الرقمي لتقديم إنذار نفسي استباقي، وحماية خصوصيتك بالكامل دون الحاجة لتسجيل دخول.', en: 'A five-dimensional monitoring system (Cognitive, Behavioral, Emotional, Social, Physiological) based on digital self-assessment to provide proactive psychological alerts, ensuring complete privacy without login requirements.' },
+
+  'pricing.free.title': { ar: 'النسخة المجانية', en: 'Free Tier' },
+  'pricing.free.price': { ar: '0 دج', en: '0 DA' },
+  'pricing.free.desc': { ar: 'متابعة أولية لجميع الأبعاد الخمسة بأسئلة محدودة، مع ميزات التتبع والإنذارات الاستباقية العامة.', en: 'Initial monitoring of all 5 dimensions with limited questions, plus tracking features & general proactive alerts.' },
+  'pricing.free.btn': { ar: '✓ خطتك الحالية', en: '✓ Current Plan' },
+
+  'pricing.basic.title': { ar: 'النسخة الأساسية', en: 'Basic Tier' },
+  'pricing.basic.price': { ar: '1,000 دج / شهرياً', en: '1,000 DA / monthly' },
+  'pricing.basic.desc': { ar: 'تتبع موسع للمؤشرات النفسية مع تقديم التوصيات المخصصة والإنذارات الاستباقية الدقيقة لاضطرابات القلق والاكتئاب.', en: 'Expanded psychological tracking with personalized recommendations & precise proactive alerts for anxiety & depression.' },
+  'pricing.basic.btn': { ar: 'قريباً', en: 'Coming Soon' },
+
+  'pricing.advanced.title': { ar: 'النسخة المتقدمة', en: 'Advanced Tier' },
+  'pricing.advanced.price': { ar: '1,500 دج / شهرياً', en: '1,500 DA / monthly' },
+  'pricing.advanced.desc': { ar: 'مراقبة شاملة وعميقة لجميع المؤشرات الوقائية للأفراد، مع تقديم توصيات عيادية عميقة وتمارين استرخاء مدمجة لمواجهة الإجهاد.', en: 'Comprehensive monitoring of all preventive indicators, featuring deep clinical recommendations & integrated relaxation exercises for stress management.' },
+  'pricing.advanced.btn': { ar: 'قريباً', en: 'Coming Soon' },
+
+  'pricing.enterprise.title': { ar: 'نسخة المؤسسات والجامعات', en: 'Enterprise & Universities' },
+  'pricing.enterprise.price': { ar: '25,000 دج / سنوياً', en: '25,000 DA / yearly' },
+  'pricing.enterprise.desc': { ar: 'باقات وعقود مخصصة موجهة للجامعات والمؤسسات لضمان الرفاهية النفسية والوقائية للطلاب والموظفين.', en: 'Custom packages & contracts for universities & organizations to ensure psychological well-being & preventive care for students & staff.' },
+  'pricing.enterprise.btn': { ar: 'قريباً', en: 'Coming Soon' },
+
+  'alert.title': { ar: 'تنبيه وقائي', en: 'Preventive Alert' },
+  'alert.message': { ar: 'مؤشرات الإجهاد/القلق لديك مرتفعة اليوم. نوصي بالبدء فوراً بتمرين وقائي مخصص.', en: 'Your stress/anxiety indicators are high today. We recommend starting a preventive exercise immediately.' },
+  'alert.cta': { ar: 'ابدأ التمرين الآن', en: 'Start Exercise Now' }
 };
 
 i18n.lang = localStorage.getItem('mindGuard_lang') || 'ar';

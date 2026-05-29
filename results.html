@@ -8,7 +8,24 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <div id="alertBanner" class="alert-banner hidden">
+    <div class="alert-banner-content">
+      <span class="alert-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M12 4L3 20h18L12 4z" stroke="#E8A838" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="rgba(232,168,56,0.12)"/>
+          <path d="M12 10v4M12 17v1" stroke="#E8A838" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <div class="alert-text">
+        <div class="alert-title" data-i18n="alert.title">تنبيه وقائي</div>
+        <div class="alert-message" data-i18n="alert.message">مؤشرات الإجهاد/القلق لديك مرتفعة اليوم. نوصي بالبدء فوراً بتمرين وقائي مخصص.</div>
+      </div>
+      <button class="alert-cta" onclick="App.navigate('emotional-release.html')" data-i18n="alert.cta">ابدأ التمرين الآن</button>
+      <button class="alert-close" onclick="dismissAlert()">✕</button>
+    </div>
+  </div>
   <button class="lang-toggle-btn" onclick="i18n.toggle()">EN</button>
+  <button class="theme-toggle-btn" onclick="App.toggleTheme()">🌙</button>
   <div class="page slide-up" style="padding-bottom:80px;">
     <div class="results-header">
       <div class="score-circle" id="scoreCircle" style="--pct: 0%;">
@@ -88,6 +105,37 @@
       }
     }
 
+    function checkAlertThreshold() {
+      const dismissed = Storage.get('alertDismissed');
+      if (dismissed === App.getTodayString()) return;
+
+      let triggerAlert = overallScore <= 40;
+
+      if (!triggerAlert) {
+        const todayAssessments = Storage.getAssessments().filter(a => a.date === App.getTodayString());
+        for (const a of todayAssessments) {
+          for (const val of Object.values(a.scores)) {
+            if (val <= 40) { triggerAlert = true; break; }
+          }
+          if (triggerAlert) break;
+        }
+      }
+
+      if (triggerAlert) {
+        document.getElementById('alertBanner').classList.remove('hidden');
+      }
+    }
+
+    function dismissAlert() {
+      Storage.set('alertDismissed', App.getTodayString());
+      const banner = document.getElementById('alertBanner');
+      banner.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+      banner.style.opacity = '0';
+      banner.style.transform = 'translateY(-100%)';
+      setTimeout(() => banner.classList.add('hidden'), 300);
+    }
+
+    checkAlertThreshold();
     renderResults();
   </script>
 </body>

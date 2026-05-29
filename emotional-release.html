@@ -9,6 +9,7 @@
 </head>
 <body>
   <button class="lang-toggle-btn" onclick="i18n.toggle()">EN</button>
+  <button class="theme-toggle-btn" onclick="App.toggleTheme()">🌙</button>
   <div class="emotional-screen">
     <h1 class="page-title text-center">
       <svg width="36" height="36" viewBox="0 0 36 36" fill="none" style="vertical-align:middle;margin-left:8px;">
@@ -36,7 +37,7 @@
       <textarea id="releaseTextarea"
         data-i18n-placeholder="emotional.placeholder"
         placeholder="اكتب هنا بحرية… لا تتردد، أنت في مساحة آمنة"
-        style="height:220px;border-radius:20px;background:#FAF9F6;"></textarea>
+        style="height:220px;border-radius:20px;"></textarea>
 
       <div style="display:flex;gap:12px;margin-top:16px;">
         <button class="btn btn-primary btn-block btn-lg" onclick="releaseFeelings()">

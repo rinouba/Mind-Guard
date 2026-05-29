@@ -1,7 +1,7 @@
 const QUESTIONS = {
   1: {
     name: "الجانب الفيزيولوجي",
-    icon: "💪",
+    icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 4C9 4 7 6 7 8v2c0 2 1 3 3 3" stroke="#5B8C85" stroke-width="1.8" stroke-linecap="round" fill="none"/><path d="M12 4c3 0 5 2 5 4v2c0 2-1 3-3 3" stroke="#5B8C85" stroke-width="1.8" stroke-linecap="round" fill="none"/><path d="M6 16c0 3 2.5 6 6 6s6-3 6-6" stroke="#5B8C85" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>',
     questions: [
       {
         id: 1,
@@ -57,7 +57,7 @@ const QUESTIONS = {
   },
   2: {
     name: "الجانب السلوكي",
-    icon: "🎯",
+    icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#5B8C85" stroke-width="1.8" fill="rgba(91,140,133,0.06)"/><circle cx="12" cy="12" r="5" stroke="#5B8C85" stroke-width="1.8" fill="none"/><circle cx="12" cy="12" r="2" fill="#5B8C85" stroke="none"/></svg>',
     questions: [
       {
         id: 1,
@@ -113,7 +113,7 @@ const QUESTIONS = {
   },
   3: {
     name: "الجانب الاجتماعي",
-    icon: "👥",
+    icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="9" r="4" stroke="#5B8C85" stroke-width="1.8" fill="rgba(91,140,133,0.06)"/><circle cx="15" cy="9" r="4" stroke="#5B8C85" stroke-width="1.8" fill="rgba(91,140,133,0.06)"/><path d="M5 20c0-3 2-5 4-5" stroke="#5B8C85" stroke-width="1.8" stroke-linecap="round" fill="none"/><path d="M19 20c0-3-2-5-4-5" stroke="#5B8C85" stroke-width="1.8" stroke-linecap="round" fill="none"/><path d="M9 15c0-2 1.5-4 3-4s3 2 3 4" stroke="#5B8C85" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>',
     questions: [
       {
         id: 1,
@@ -169,7 +169,7 @@ const QUESTIONS = {
   },
   4: {
     name: "الجانب الانفعالي",
-    icon: "💚",
+    icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 20s-6-4-6-8c0-2.2 1.8-4 4-4 1.3 0 2.5.7 3.2 1.7" stroke="#5B8C85" stroke-width="1.8" stroke-linecap="round" fill="none"/><path d="M12 20s6-4 6-8c0-2.2-1.8-4-4-4-1.3 0-2.5.7-3.2 1.7" stroke="#5B8C85" stroke-width="1.8" stroke-linecap="round" fill="rgba(91,140,133,0.06)"/></svg>',
     questions: [
       {
         id: 1,
@@ -225,7 +225,7 @@ const QUESTIONS = {
   },
   5: {
     name: "الجانب المعرفي",
-    icon: "🧠",
+    icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" fill="rgba(91,140,133,0.06)"/><path d="M12 5c-2 0-3.5 1.5-3.5 3v1.5c0 1.5.7 2.3 2 2.3" stroke="#5B8C85" stroke-width="1.8" stroke-linecap="round" fill="none"/><path d="M12 5c2 0 3.5 1.5 3.5 3v1.5c0 1.5-.7 2.3-2 2.3" stroke="#5B8C85" stroke-width="1.8" stroke-linecap="round" fill="none"/><path d="M7.5 15c0 2.5 2 4.5 4.5 4.5s4.5-2 4.5-4.5" stroke="#5B8C85" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>',
     questions: [
       {
         id: 1,
@@ -290,9 +290,9 @@ const ASPECT_NAMES = {
 };
 
 const ASPECT_ICONS = {
-  1: "💪",
-  2: "🎯",
-  3: "👥",
-  4: "💚",
-  5: "🧠"
+  1: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 4C9 4 7 6 7 8v2c0 2 1 3 3 3" stroke="#5B8C85" stroke-width="1.8" stroke-linecap="round" fill="none"/><path d="M12 4c3 0 5 2 5 4v2c0 2-1 3-3 3" stroke="#5B8C85" stroke-width="1.8" stroke-linecap="round" fill="none"/><path d="M6 16c0 3 2.5 6 6 6s6-3 6-6" stroke="#5B8C85" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>',
+  2: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#5B8C85" stroke-width="1.8" fill="rgba(91,140,133,0.06)"/><circle cx="12" cy="12" r="5" stroke="#5B8C85" stroke-width="1.8" fill="none"/><circle cx="12" cy="12" r="2" fill="#5B8C85" stroke="none"/></svg>',
+  3: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="9" r="4" stroke="#5B8C85" stroke-width="1.8" fill="rgba(91,140,133,0.06)"/><circle cx="15" cy="9" r="4" stroke="#5B8C85" stroke-width="1.8" fill="rgba(91,140,133,0.06)"/><path d="M5 20c0-3 2-5 4-5" stroke="#5B8C85" stroke-width="1.8" stroke-linecap="round" fill="none"/><path d="M19 20c0-3-2-5-4-5" stroke="#5B8C85" stroke-width="1.8" stroke-linecap="round" fill="none"/><path d="M9 15c0-2 1.5-4 3-4s3 2 3 4" stroke="#5B8C85" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>',
+  4: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 20s-6-4-6-8c0-2.2 1.8-4 4-4 1.3 0 2.5.7 3.2 1.7" stroke="#5B8C85" stroke-width="1.8" stroke-linecap="round" fill="none"/><path d="M12 20s6-4 6-8c0-2.2-1.8-4-4-4-1.3 0-2.5.7-3.2 1.7" stroke="#5B8C85" stroke-width="1.8" stroke-linecap="round" fill="rgba(91,140,133,0.06)"/></svg>',
+  5: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" fill="rgba(91,140,133,0.06)"/><path d="M12 5c-2 0-3.5 1.5-3.5 3v1.5c0 1.5.7 2.3 2 2.3" stroke="#5B8C85" stroke-width="1.8" stroke-linecap="round" fill="none"/><path d="M12 5c2 0 3.5 1.5 3.5 3v1.5c0 1.5-.7 2.3-2 2.3" stroke="#5B8C85" stroke-width="1.8" stroke-linecap="round" fill="none"/><path d="M7.5 15c0 2.5 2 4.5 4.5 4.5s4.5-2 4.5-4.5" stroke="#5B8C85" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>'
 };

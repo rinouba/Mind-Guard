@@ -197,6 +197,29 @@
       border: 2px solid rgba(232, 168, 56, 0.4);
     }
 
+    .pricing-btn-primary {
+      background: var(--gradient-primary);
+      color: white;
+      box-shadow: var(--shadow-btn);
+      cursor: pointer;
+    }
+    .pricing-btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(91,140,133,0.3);
+    }
+
+    .pricing-btn-outline {
+      background: transparent;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+      cursor: pointer;
+    }
+    .pricing-btn-outline:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-2px);
+    }
+
     .pricing-divider {
       text-align: center;
       position: relative;
@@ -236,6 +259,7 @@
 </head>
 <body>
   <button class="lang-toggle-btn" onclick="i18n.toggle()">EN</button>
+  <button class="theme-toggle-btn" onclick="App.toggleTheme()">🌙</button>
   <div class="pricing-page blob-bg">
     <div style="position:relative;z-index:1;">
       <h1 class="pricing-title" data-i18n="pricing.title">اختر باقتك</h1>
@@ -245,39 +269,45 @@
 
         <div class="pricing-card">
           <div class="pricing-header">
-            <div class="pricing-name" data-i18n="pricing.freeName">الخطة المجانية</div>
-            <div class="pricing-price" data-i18n="pricing.freePrice">مجاناً</div>
+            <div class="pricing-name" data-i18n="pricing.free.title">النسخة المجانية</div>
+            <div class="pricing-price" data-i18n="pricing.free.price">0 دج</div>
           </div>
-
-          <ul class="pricing-features">
-            <li><i class="fas fa-check-circle"></i> <span data-i18n="pricing.feature1">تقييم نفسي يومي</span></li>
-            <li><i class="fas fa-check-circle"></i> <span data-i18n="pricing.feature2">3 تمارين تفاعلية</span></li>
-            <li><i class="fas fa-check-circle"></i> <span data-i18n="pricing.feature3">تخزين بيانات محلي</span></li>
-          </ul>
-
+          <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.7;margin-bottom:20px;" data-i18n="pricing.free.desc">متابعة أولية لجميع الأبعاد الخمسة بأسئلة محدودة، مع ميزات التتبع والإنذارات الاستباقية العامة.</p>
           <button class="pricing-btn pricing-btn-free" disabled>
-            <i class="fas fa-check"></i> <span data-i18n="pricing.freeBtn">خطتك الحالية</span>
+            <i class="fas fa-check"></i> <span data-i18n="pricing.free.btn">✓ خطتك الحالية</span>
           </button>
         </div>
 
-        <div class="pricing-divider"><span data-i18n="pricing.bestValue">الأفضل</span></div>
-
-        <div class="pricing-card premium">
+        <div class="pricing-card">
           <div class="pricing-header">
-            <div class="pricing-badge">Premium</div>
-            <div class="pricing-name" data-i18n="pricing.premiumName">Mind Guard Premium</div>
-            <div class="pricing-price">499 <span data-i18n="pricing.premiumPrice">دج/شهرياً</span></div>
+            <div class="pricing-name" data-i18n="pricing.basic.title">النسخة الأساسية</div>
+            <div class="pricing-price" data-i18n="pricing.basic.price">1,000 دج / شهرياً</div>
           </div>
-
-          <ul class="pricing-features">
-            <li><i class="fas fa-check-circle"></i> <span data-i18n="pricing.premiumFeature1">كل ميزات المجانية</span></li>
-            <li><i class="fas fa-star"></i> <span data-i18n="pricing.premiumFeature2">تقارير أسبوعية مفصلة</span></li>
-            <li><i class="fas fa-star"></i> <span data-i18n="pricing.premiumFeature3">تمارين حصرية إضافية</span></li>
-            <li><i class="fas fa-cloud-upload-alt"></i> <span data-i18n="pricing.premiumFeature4">مزامنة سحابية</span></li>
-          </ul>
-
+          <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.7;margin-bottom:20px;" data-i18n="pricing.basic.desc">تتبع موسع للمؤشرات النفسية مع تقديم التوصيات المخصصة والإنذارات الاستباقية الدقيقة لاضطرابات القلق والاكتئاب.</p>
           <button class="pricing-btn pricing-btn-premium" disabled>
-            <span data-i18n="pricing.premiumBtn">قريباً 🔜</span>
+            <span data-i18n="pricing.basic.btn">قريباً</span>
+          </button>
+        </div>
+
+        <div class="pricing-card">
+          <div class="pricing-header">
+            <div class="pricing-name" data-i18n="pricing.advanced.title">النسخة المتقدمة</div>
+            <div class="pricing-price" data-i18n="pricing.advanced.price">1,500 دج / شهرياً</div>
+          </div>
+          <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.7;margin-bottom:20px;" data-i18n="pricing.advanced.desc">مراقبة شاملة وعميقة لجميع المؤشرات الوقائية للأفراد، مع تقديم توصيات عيادية عميقة وتمارين استرخاء مدمجة لمواجهة الإجهاد.</p>
+          <button class="pricing-btn pricing-btn-premium" disabled>
+            <span data-i18n="pricing.advanced.btn">قريباً</span>
+          </button>
+        </div>
+
+        <div class="pricing-card">
+          <div class="pricing-header">
+            <div class="pricing-name" data-i18n="pricing.enterprise.title">نسخة المؤسسات والجامعات</div>
+            <div class="pricing-price" data-i18n="pricing.enterprise.price">25,000 دج / سنوياً</div>
+          </div>
+          <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.7;margin-bottom:20px;" data-i18n="pricing.enterprise.desc">باقات وعقود مخصصة موجهة للجامعات والمؤسسات لضمان الرفاهية النفسية والوقائية للطلاب والموظفين.</p>
+          <button class="pricing-btn pricing-btn-premium" disabled>
+            <span data-i18n="pricing.enterprise.btn">قريباً</span>
           </button>
         </div>
 

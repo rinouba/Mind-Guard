@@ -80,6 +80,43 @@ const App = {
     return map[mood] || '';
   },
 
+  startJourney() {
+    Storage.set('journeyStarted', true);
+    window.location.href = 'mood-check.html';
+  },
+
+  getThemeIcon(isDark) {
+    if (isDark) {
+      return '<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="4.5" stroke="#5B8C85" stroke-width="1.3"/><path d="M9 1v2M9 15v2M1 9h2M15 9h2M3.5 3.5l1.5 1.5M13 13l1.5 1.5M3.5 14.5l1.5-1.5M13 5l1.5-1.5" stroke="#5B8C85" stroke-width="1.3" stroke-linecap="round" opacity="0.6"/></svg>';
+    }
+    return '<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="5" stroke="#5B8C85" stroke-width="1.3"/><path d="M9 1v2M9 15v2M1 9h2M15 9h2M3.5 3.5l1.5 1.5M13 13l1.5 1.5M3.5 14.5l1.5-1.5M13 5l1.5-1.5" stroke="#7A8B87" stroke-width="1.3" stroke-linecap="round" opacity="0.4"/></svg>';
+  },
+
+  toggleTheme() {
+    const html = document.documentElement;
+    const isDark = html.classList.toggle('dark');
+    Storage.set('mindGuard_theme', isDark ? 'dark' : 'light');
+    Array.from(document.querySelectorAll('.theme-toggle-btn')).forEach(el => {
+      el.innerHTML = this.getThemeIcon(isDark);
+    });
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', isDark ? '#1A1C1E' : '#5B8C85');
+  },
+
+  initTheme() {
+    const saved = Storage.get('mindGuard_theme');
+    if (saved === 'dark') {
+      document.documentElement.classList.add('dark');
+      Array.from(document.querySelectorAll('.theme-toggle-btn')).forEach(el => {
+        el.innerHTML = this.getThemeIcon(true);
+      });
+      document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#1A1C1E');
+    } else {
+      Array.from(document.querySelectorAll('.theme-toggle-btn')).forEach(el => {
+        el.innerHTML = this.getThemeIcon(false);
+      });
+    }
+  },
+
   navigate(url) {
     window.location.href = url;
   },
@@ -96,11 +133,15 @@ const App = {
       if (href === currentPage) {
         item.classList.add('active');
       }
+      if (Storage.get('journeyStarted') && href === 'index.html') {
+        item.style.display = 'none';
+      }
     });
   }
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+  App.initTheme();
   if (document.querySelector('.bottom-nav')) {
     App.initBottomNav();
   }

@@ -9,6 +9,7 @@
 </head>
 <body>
   <button class="lang-toggle-btn" onclick="i18n.toggle()">EN</button>
+  <button class="theme-toggle-btn" onclick="App.toggleTheme()">🌙</button>
   <div class="relaxation-screen">
     <h1 class="page-title text-center" data-i18n="relaxation.title">استرخاء العضلات التدريجي</h1>
     <p class="page-subtitle text-center" style="margin-bottom:24px;" data-i18n="relaxation.subtitle">اتبع الخطوات بتركيز</p>
@@ -102,7 +103,7 @@
 
     function endRelaxation() {
       if (relaxInterval) clearInterval(relaxInterval);
-      document.getElementById('relaxTimer').textContent = i18n.t('relaxation.wellDone') + ' 🎉';
+      document.getElementById('relaxTimer').innerHTML = i18n.t('relaxation.wellDone') + ' <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="vertical-align:middle;"><circle cx="10" cy="10" r="8" fill="rgba(232,168,56,0.15)"/><path d="M7 10l2 2 4-4" stroke="#E8A838" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 4l2 1M16 4l-2 1M4 16l2-1M16 16l-2-1" stroke="#A8D5BA" stroke-width="1.2" stroke-linecap="round"/></svg>';
       document.getElementById('relaxPauseBtn').style.display = 'none';
       document.getElementById('relaxEndBtn').style.display = 'none';
       const params = new URLSearchParams(window.location.search);
