@@ -369,35 +369,10 @@ body {
 a { text-decoration: none; color: inherit; }
 
 /* Language Toggle */
-.lang-toggle-btn {
-  position: fixed;
-  top: 16px;
-  left: 16px;
-  z-index: 1001;
-  background: var(--card-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--card-border);
-  box-shadow: var(--card-shadow);
-  border-radius: var(--radius-pill);
-  padding: 6px 16px;
-  font-family: var(--font-body);
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--primary);
-  cursor: pointer;
-  transition: all var(--duration-fast) var(--ease-smooth);
-}
-.lang-toggle-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 20px rgba(91,140,133,0.15);
-}
-
-/* Theme Toggle Button */
+.lang-toggle-btn,
 .theme-toggle-btn {
   position: fixed;
   top: 16px;
-  left: 76px;
   z-index: 1001;
   background: var(--card-bg);
   backdrop-filter: blur(12px);
@@ -405,9 +380,8 @@ a { text-decoration: none; color: inherit; }
   border: 1px solid var(--card-border);
   box-shadow: var(--card-shadow);
   border-radius: var(--radius-pill);
-  padding: 8px 12px;
   font-family: var(--font-body);
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: 700;
   color: var(--primary);
   cursor: pointer;
@@ -416,19 +390,27 @@ a { text-decoration: none; color: inherit; }
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 34px;
+  box-sizing: border-box;
 }
+.lang-toggle-btn:hover,
 .theme-toggle-btn:hover {
   transform: scale(1.05);
   box-shadow: 0 6px 20px rgba(91,140,133,0.15);
 }
 
-.theme-toggle-btn svg {
-  display: block;
+.lang-toggle-btn {
+  left: 20px;
+  padding: 0 14px;
 }
 
-html[dir="ltr"] .theme-toggle-btn {
-  left: auto;
-  right: 76px;
+.theme-toggle-btn {
+  left: 80px;
+  padding: 0 10px;
+}
+
+.theme-toggle-btn svg {
+  display: block;
 }
 
 /* LTR English Support */
@@ -464,11 +446,6 @@ html[dir="ltr"] .mood-selector,
 html[dir="ltr"] .aspect-grid {
   direction: ltr;
 }
-html[dir="ltr"] .lang-toggle-btn {
-  left: auto;
-  right: 16px;
-}
-
 button {
   font-family: var(--font-body);
   cursor: pointer;
@@ -758,7 +735,8 @@ textarea {
   justify-content: center;
   padding: 40px 28px;
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .splash-screen::before {
@@ -771,6 +749,7 @@ textarea {
   left: -150px;
   border-radius: 50%;
   animation: blobDrift 10s ease-in-out infinite alternate;
+  pointer-events: none;
 }
 
 .splash-screen::after {
@@ -783,15 +762,24 @@ textarea {
   right: -120px;
   border-radius: 50%;
   animation: blobDrift2 12s ease-in-out infinite alternate;
+  pointer-events: none;
 }
 
 .splash-logo {
-  width: 110px;
-  height: 110px;
-  margin-bottom: var(--gap-lg);
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
   position: relative;
   filter: drop-shadow(0 4px 20px rgba(91, 140, 133, 0.2));
   animation: float 4s ease-in-out infinite;
+}
+
+.splash-logo img {
+  width: 100%;
+  height: 100%;
+  border-radius: 18px;
+  object-fit: cover;
+  box-shadow: 0 4px 20px rgba(91, 140, 133, 0.2);
 }
 
 .splash-logo svg {
@@ -805,39 +793,45 @@ textarea {
   font-weight: 600;
   color: var(--text-primary);
   text-align: center;
-  margin-bottom: var(--gap-md);
+  margin-bottom: 10px;
   position: relative;
   animation: fadeIn 0.6s var(--ease-smooth) both;
   animation-delay: 0.2s;
   letter-spacing: -0.01em;
-  line-height: 1.7;
+  line-height: 1.5;
 }
 
 .splash-title br + span {
   display: block;
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: 0.82rem;
+  font-size: 0.9rem;
   color: var(--text-secondary);
-  margin-top: 4px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  line-height: 1.5;
 }
 
 .splash-quote {
   font-size: 0.88rem;
   color: var(--text-secondary);
   font-weight: 350;
-  line-height: 2;
-  margin-bottom: 48px;
+  line-height: 1.6;
   text-align: center;
   position: relative;
   animation: fadeIn 0.6s var(--ease-smooth) both;
   animation-delay: 0.4s;
-  max-width: 400px;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 0 24px;
 }
 
 @media (min-width: 480px) {
   .splash-title { font-size: 1.6rem; }
-  .splash-quote { font-size: 0.95rem; }
+  .splash-title br + span { font-size: 0.95rem; }
+  .splash-quote { font-size: 0.92rem; line-height: 1.65; max-width: 420px; }
 }
 
 .splash-screen .btn {
@@ -848,6 +842,7 @@ textarea {
   font-size: 1rem;
   letter-spacing: 0.5px;
   border-radius: 50px;
+  margin-top: 20px;
 }
 
 /* ==========================================

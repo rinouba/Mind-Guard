@@ -43,7 +43,7 @@ const i18n = {
     });
 
     document.querySelectorAll('.lang-toggle-btn').forEach(el => {
-      el.textContent = this.lang === 'ar' ? 'EN' : 'عربي';
+      el.textContent = this.lang === 'ar' ? 'EN' : 'عر';
     });
   },
 

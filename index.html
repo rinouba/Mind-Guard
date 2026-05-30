@@ -20,13 +20,12 @@
     <button class="lang-toggle-btn" onclick="i18n.toggle()">EN</button>
     <button class="theme-toggle-btn" onclick="App.toggleTheme()">🌙</button>
     <div class="splash-logo">
-      <img src="icons/logo.jpg" alt="Mind Guard" style="width:120px;height:120px;border-radius:20px;object-fit:cover;box-shadow:0 4px 20px rgba(91,140,133,0.2);">
+      <img src="icons/logo.jpg" alt="Mind Guard">
     </div>
     <h1 class="splash-title" data-i18n-html="hero.title">
-      
       منصة MindGuard<br><span>المنصة الرقمية لتحليل المؤشرات السلوكية والتنبؤ باضطرابات القلق، الاكتئاب، والإجهاد النفسي</span></h1>
     <p class="splash-quote" data-i18n="hero.subtitle">نظام رصد خماسي الأبعاد (معرفي، سلوكي، انفعالي، اجتماعي، وفيزيولوجي) يعتمد على التقييم الذاتي الرقمي لتقديم إنذار نفسي استباقي، وحماية خصوصيتك بالكامل دون الحاجة لتسجيل دخول.</p>
-    <button class="btn btn-primary btn-lg" onclick="App.startJourney()" data-i18n="index.startBtn">ابدأ الرحلة</button>
+    <button class="btn btn-primary btn-lg" id="startJourneyBtn" data-i18n="index.startBtn">ابدأ الرحلة</button>
   </div>
   <script src="js/storage.js"></script>
   <script src="js/questions.js"></script>

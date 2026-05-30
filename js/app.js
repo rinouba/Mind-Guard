@@ -142,6 +142,10 @@ const App = {
 
 document.addEventListener('DOMContentLoaded', () => {
   App.initTheme();
+  const startBtn = document.getElementById('startJourneyBtn');
+  if (startBtn) {
+    startBtn.addEventListener('click', () => App.startJourney());
+  }
   if (document.querySelector('.bottom-nav')) {
     App.initBottomNav();
   }
