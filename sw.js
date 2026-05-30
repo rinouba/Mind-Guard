@@ -1,6 +1,7 @@
-const CACHE_NAME = 'mind-guard-v2';
+const CACHE_NAME = 'mind-guard-v3';
+const VERSION = '1.0.0';
 
-const FILES_TO_CACHE = [
+const PRECACHE_FILES = [
   '/',
   '/index.html',
   '/mood-check.html',
@@ -14,6 +15,7 @@ const FILES_TO_CACHE = [
   '/cbt.html',
   '/progress.html',
   '/profile.html',
+  '/pricing.html',
   '/css/style.css',
   '/js/app.js',
   '/js/questions.js',
@@ -31,53 +33,39 @@ const FILES_TO_CACHE = [
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) => {
-        return cache.addAll(FILES_TO_CACHE);
-      })
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(PRECACHE_FILES))
   );
   self.skipWaiting();
 });
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((name) => {
-          if (name !== CACHE_NAME) {
-            return caches.delete(name);
-          }
-        })
-      );
-    })
+    caches.keys().then((names) =>
+      Promise.all(names.filter((n) => n !== CACHE_NAME).map((n) => caches.delete(n)))
+    ).then(() => self.clients.claim())
   );
-  self.clients.claim();
 });
 
 self.addEventListener('fetch', (event) => {
+  if (event.request.method !== 'GET') return;
+
   event.respondWith(
-    caches.match(event.request)
+    fetch(event.request)
       .then((response) => {
-        if (response) {
-          return response;
-        }
-        return fetch(event.request)
-          .then((response) => {
-            if (!response || response.status !== 200 || response.type !== 'basic') {
-              return response;
-            }
-            const responseToCache = response.clone();
-            caches.open(CACHE_NAME)
-              .then((cache) => {
-                cache.put(event.request, responseToCache);
-              });
-            return response;
-          })
-          .catch(() => {
-            if (event.request.mode === 'navigate') {
-              return caches.match('/index.html');
-            }
-          });
+        const clone = response.clone();
+        caches.open(CACHE_NAME).then((cache) => {
+          if (event.request.url.startsWith(self.location.origin) || event.request.url.startsWith('https://fonts.googleapis.com') || event.request.url.startsWith('https://cdnjs.cloudflare.com')) {
+            cache.put(event.request, clone);
+          }
+        });
+        return response;
       })
+      .catch(() => caches.match(event.request).then((r) => r || new Response('Offline', { status: 503 })))
   );
+});
+
+self.addEventListener('message', (event) => {
+  if (event.data === 'skipWaiting') {
+    self.skipWaiting();
+  }
 });
