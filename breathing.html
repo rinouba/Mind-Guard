@@ -6,21 +6,118 @@
   <meta name="theme-color" content="#5B8C85">
   <title>Mind Guard - تمرين التنفس</title>
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    .breath-wrap{display:flex;flex-direction:column;align-items:center;min-height:calc(100vh - 160px);padding:20px;text-align:center;position:relative}
+    .breath-wrap::before,.breath-wrap::after{content:'';position:absolute;border-radius:50%;pointer-events:none;z-index:0}
+    .breath-wrap::before{width:300px;height:300px;background:radial-gradient(circle,rgba(168,213,186,0.12),transparent);top:-80px;right:-100px;animation:blobDrift 8s ease-in-out infinite alternate}
+    .breath-wrap::after{width:250px;height:250px;background:radial-gradient(circle,rgba(91,140,133,0.1),transparent);bottom:-60px;left:-80px;animation:blobDrift2 10s ease-in-out infinite alternate}
+    .breath-card{background:var(--card-bg);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--card-border);border-radius:var(--radius-card);box-shadow:var(--card-shadow);padding:32px 28px;max-width:400px;width:100%;position:relative;z-index:1;animation:cardEntrance 0.5s cubic-bezier(0.4,0,0.2,1)}
+    .breath-orb-wrap{position:relative;width:280px;height:280px;margin:12px auto;display:flex;align-items:center;justify-content:center}
+    .breath-orb{width:130px;height:130px;border-radius:50%;position:relative;z-index:3;display:flex;align-items:center;justify-content:center;will-change:transform}
+    .breath-orb.idle{background:radial-gradient(circle at 35% 35%,#A8D5BA,var(--primary));box-shadow:0 0 60px rgba(91,140,133,0.2)}
+    .breath-orb.inhale{background:radial-gradient(circle at 35% 35%,#A8D5BA,var(--primary));box-shadow:0 0 100px rgba(91,140,133,0.35)}
+    .breath-orb.hold{background:radial-gradient(circle at 35% 35%,#C4E0D5,var(--secondary-mint));box-shadow:0 0 120px rgba(168,213,186,0.35)}
+    .breath-orb.exhale{background:radial-gradient(circle at 35% 35%,var(--warm-beige-dark),var(--warm-beige));box-shadow:0 0 80px rgba(230,204,178,0.35)}
+    .breath-orb-count{font-size:2.2rem;font-weight:800;color:rgba(255,255,255,0.95);font-family:var(--font-heading);text-shadow:0 2px 12px rgba(0,0,0,0.15);line-height:1;user-select:none}
+    .breath-ring{position:absolute;border-radius:50%;pointer-events:none;z-index:1;top:50%;left:50%;transform:translate(-50%,-50%)}
+    .breath-ring.wave-inhale{animation:ringWave 4s ease-out forwards;border:2px solid var(--primary);box-shadow:0 0 20px rgba(91,140,133,0.1)}
+    .breath-ring.wave-hold{animation:ringWave 7s ease-out forwards;border:2px solid var(--secondary-mint);box-shadow:0 0 20px rgba(168,213,186,0.1)}
+    .breath-ring.wave-exhale{animation:ringWave 8s ease-out forwards;border:2px solid var(--warm-beige-dark);box-shadow:0 0 20px rgba(230,204,178,0.1)}
+    @keyframes ringWave{
+      0%{width:130px;height:130px;opacity:0.6}
+      50%{opacity:0.3}
+      100%{width:380px;height:380px;opacity:0}
+    }
+    .breath-ring-stagger{position:absolute;border-radius:50%;pointer-events:none;z-index:0;top:50%;left:50%;transform:translate(-50%,-50%)}
+    .breath-ring-stagger.s1{animation:ringWaveStagger1 4s ease-out forwards;border:1.5px solid var(--primary);opacity:0}
+    .breath-ring-stagger.s2{animation:ringWaveStagger2 4s ease-out forwards;border:1.5px solid var(--primary);opacity:0}
+    @keyframes ringWaveStagger1{
+      0%{width:130px;height:130px;opacity:0.4}
+      50%{opacity:0.2}
+      100%{width:350px;height:350px;opacity:0}
+    }
+    @keyframes ringWaveStagger2{
+      0%{width:130px;height:130px;opacity:0.25}
+      50%{opacity:0.1}
+      100%{width:320px;height:320px;opacity:0}
+    }
+    .breath-particle{position:absolute;border-radius:50%;pointer-events:none;z-index:0;background:var(--primary);opacity:0.4;width:4px;height:4px}
+    .breath-particle.p1{animation:particleOrbit1 8s linear infinite}
+    .breath-particle.p2{animation:particleOrbit2 11s linear infinite}
+    .breath-particle.p3{animation:particleOrbit1 9s linear infinite;width:3px;height:3px;opacity:0.3}
+    .breath-particle.p4{animation:particleOrbit2 12s linear infinite;width:3px;height:3px;opacity:0.3}
+    .breath-particle.p5{animation:particleOrbit1 10s linear infinite;width:5px;height:5px;opacity:0.25;background:var(--secondary-mint)}
+    .breath-particle.p6{animation:particleOrbit2 9s linear infinite;width:5px;height:5px;opacity:0.25;background:var(--secondary-mint)}
+    @keyframes particleOrbit1{
+      0%{transform:rotate(0deg) translateY(-120px) rotate(0deg)}
+      100%{transform:rotate(360deg) translateY(-120px) rotate(-360deg)}
+    }
+    @keyframes particleOrbit2{
+      0%{transform:rotate(45deg) translateY(-110px) rotate(-45deg)}
+      100%{transform:rotate(405deg) translateY(-110px) rotate(-405deg)}
+    }
+    .breath-phase-label{font-size:1.5rem;font-weight:700;margin:8px 0 2px;min-height:40px;transition:color 0.5s cubic-bezier(0.4,0,0.2,1)}
+    .breath-phase-label.idle{color:var(--text-secondary)}
+    .breath-phase-label.inhale{color:var(--primary)}
+    .breath-phase-label.hold{color:var(--secondary-mint)}
+    .breath-phase-label.exhale{color:var(--warm-beige-dark)}
+    .breath-meta{display:flex;gap:32px;justify-content:center;margin:6px 0 16px}
+    .breath-meta-item{text-align:center}
+    .breath-meta-value{font-size:1.1rem;font-weight:700;color:var(--text-primary);direction:ltr;font-variant-numeric:tabular-nums}
+    .breath-meta-label{font-size:0.72rem;color:var(--text-secondary)}
+    .breath-progress{width:100%;height:3px;background:var(--border-soft);border-radius:2px;overflow:hidden;margin:4px 0 16px}
+    .breath-progress-fill{height:100%;background:var(--gradient-primary);border-radius:2px;transition:width 1s linear;width:0%}
+    .breath-btn-group{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;animation:fadeIn 0.4s cubic-bezier(0.4,0,0.2,1)}
+    .breath-footer{font-size:0.78rem;color:var(--text-secondary);margin-top:14px;opacity:0.6}
+  </style>
 </head>
 <body>
   <button class="lang-toggle-btn" onclick="i18n.toggle()">EN</button>
   <button class="theme-toggle-btn" onclick="App.toggleTheme()">🌙</button>
-  <div class="breathing-screen" id="breathingScreen">
-    <div class="breathing-circle" id="breathingCircle">
-      <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-        <path d="M30 10C18.95 10 10 18.95 10 30s8.95 20 20 20 20-8.95 20-20S41.05 10 30 10z" fill="rgba(255,255,255,0.3)"/>
-      </svg>
+  <div class="page" style="padding-bottom:80px;">
+    <div class="breath-wrap">
+      <h1 class="page-title" data-i18n="breath.title">تمارين التنفس</h1>
+      <p class="page-subtitle" data-i18n="breath.subtitle">4-7-8 .. تنفس واسترخِ</p>
+
+      <div class="breath-card">
+        <div class="breath-orb-wrap" id="orbWrap">
+          <div class="breath-orb idle" id="breathOrb">
+            <div class="breath-orb-count" id="breathCount">0</div>
+          </div>
+        </div>
+
+        <div class="breath-phase-label idle" id="breathPhase" data-i18n="breath.ready">اضغط ابدأ</div>
+
+        <div class="breath-progress"><div class="breath-progress-fill" id="breathProgress"></div></div>
+
+        <div class="breath-meta">
+          <div class="breath-meta-item">
+            <div class="breath-meta-value" id="breathTimer">03:00</div>
+            <div class="breath-meta-label" data-i18n="breath.timeLabel">الوقت</div>
+          </div>
+          <div class="breath-meta-item">
+            <div class="breath-meta-value" id="breathCycle">0/0</div>
+            <div class="breath-meta-label" data-i18n="breath.cycleLabel">الدورات</div>
+          </div>
+        </div>
+
+        <div class="breath-btn-group">
+          <button class="btn btn-primary btn-lg" id="breathStartBtn" onclick="startBreathing()"><span data-i18n="breath.start">ابدأ التمرين</span></button>
+          <button class="btn btn-secondary btn-lg" id="breathStopBtn" onclick="stopBreathing()" style="display:none;"><span data-i18n="breath.stop">إنهاء</span></button>
+        </div>
+
+        <div class="breath-footer" data-i18n="breath.footer">شهيق 4 ثوانٍ .. احبس 7 .. زفير 8</div>
+      </div>
     </div>
-    <div class="breathing-instruction" id="breathingInstruction">تنفس ببطء من الأنف</div>
-    <div class="breathing-counter" id="breathingCounter">الدورة 1 من 4</div>
-    <button class="btn btn-primary btn-lg" id="breathingEndBtn" onclick="endBreathing()" style="display:none;"><span data-i18n="breathing.endBtn">إنهاء التمرين</span></button>
-    <button class="btn btn-secondary" id="breathingStartBtn" onclick="startBreathing()"><span data-i18n="breathing.startBtn">ابدأ التمرين</span></button>
   </div>
+
+  <nav class="bottom-nav">
+    <a href="index.html"><i class="fas fa-home"></i><span data-i18n="nav.home">الرئيسية</span></a>
+    <a href="progress.html"><i class="fas fa-chart-line"></i><span data-i18n="nav.progress">التقدم</span></a>
+    <a href="mood-check.html"><i class="fas fa-plus-circle"></i><span data-i18n="nav.newAssessment">تقييم جديد</span></a>
+    <a href="aspects.html"><i class="fas fa-dumbbell"></i><span data-i18n="nav.exercises">التمارين</span></a>
+    <a href="profile.html"><i class="fas fa-user"></i><span data-i18n="nav.profile">الملف الشخصي</span></a>
+  </nav>
 
   <script src="js/storage.js"></script>
   <script src="js/questions.js"></script>
@@ -28,79 +125,201 @@
   <script src="js/i18n.js"></script>
   <script src="js/app.js"></script>
   <script>
-    let breathingInterval = null;
-    let currentPhase = 0;
-    let currentCycle = 0;
+    var breathTrans = {
+      'breath.title': { ar: 'تمارين التنفس', en: 'Breathing Exercise' },
+      'breath.subtitle': { ar: '4-7-8 .. تنفس واسترخِ', en: '4-7-8 .. Breathe & Relax' },
+      'breath.ready': { ar: 'اضغط ابدأ', en: 'Press Start' },
+      'breath.inhale': { ar: 'شهيق', en: 'Inhale' },
+      'breath.hold': { ar: 'احبس النفس', en: 'Hold' },
+      'breath.exhale': { ar: 'زفير', en: 'Exhale' },
+      'breath.complete': { ar: 'أحسنت!', en: 'Well Done!' },
+      'breath.timeLabel': { ar: 'الوقت', en: 'Time' },
+      'breath.cycleLabel': { ar: 'الدورات', en: 'Cycles' },
+      'breath.start': { ar: 'ابدأ التمرين', en: 'Start Exercise' },
+      'breath.stop': { ar: 'إنهاء', en: 'End' },
+      'breath.footer': { ar: 'شهيق 4 ثوانٍ .. احبس 7 .. زفير 8', en: 'Inhale 4s .. Hold 7s .. Exhale 8s' }
+    };
+    for (var k in breathTrans) { if (!i18n.translations[k]) i18n.translations[k] = breathTrans[k]; }
 
-    function getPhases() {
-      if (i18n.lang === 'en') {
-        return [
-          { text: 'Breathe in slowly through your nose', css: 'inhale', duration: 4000 },
-          { text: 'Hold your breath', css: 'hold', duration: 4000 },
-          { text: 'Exhale slowly', css: 'exhale', duration: 4000 },
-          { text: 'Hold your breath', css: 'hold', duration: 4000 }
-        ];
-      }
-      return [
-        { text: 'تنفس ببطء من الأنف', css: 'inhale', duration: 4000 },
-        { text: 'احبس النفس', css: 'hold', duration: 4000 },
-        { text: 'أخرج الهواء ببطء', css: 'exhale', duration: 4000 },
-        { text: 'احبس النفس', css: 'hold', duration: 4000 }
-      ];
-    }
-    const totalCycles = 4;
+    var breathing = {
+      active: false, phase: 'idle', cycle: 0, totalCycles: 0,
+      secondsLeft: 180, totalSeconds: 180,
+      timer: null, countInterval: null, countValue: 0,
+      animFrame: null,
+      INHALE: 4, HOLD: 7, EXHALE: 8,
 
-    function startBreathing() {
-      document.getElementById('breathingStartBtn').style.display = 'none';
-      document.getElementById('breathingEndBtn').style.display = 'block';
-      currentCycle = 1;
-      currentPhase = 0;
-      runPhase();
-    }
+      createParticles: function () {
+        var wrap = document.getElementById('orbWrap');
+        if (!wrap || wrap.querySelector('.breath-particle')) return;
+        for (var i = 1; i <= 6; i++) {
+          var p = document.createElement('div');
+          p.className = 'breath-particle p' + i;
+          wrap.appendChild(p);
+        }
+      },
 
-    function runPhase() {
-      const phases = getPhases();
-      const phase = phases[currentPhase];
-      const circle = document.getElementById('breathingCircle');
-      const instruction = document.getElementById('breathingInstruction');
+      removeParticles: function () {
+        var ps = document.querySelectorAll('.breath-particle');
+        for (var i = 0; i < ps.length; i++) { ps[i].remove(); }
+      },
 
-      circle.className = 'breathing-circle ' + phase.css;
-      instruction.textContent = phase.text;
-      document.getElementById('breathingCounter').textContent = i18n.t('breathing.cycle').replace('{n}', currentCycle).replace('{total}', totalCycles);
+      easeInOut: function (t) {
+        return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+      },
 
-      if (breathingInterval) clearTimeout(breathingInterval);
-      breathingInterval = setTimeout(() => {
-        currentPhase++;
-        if (currentPhase >= phases.length) {
-          currentPhase = 0;
-          currentCycle++;
-          if (currentCycle > totalCycles) {
-            endBreathing();
-            return;
+      animateOrb: function (fromScale, toScale, duration, onDone) {
+        var self = this;
+        var startTime = performance.now();
+
+        function frame(now) {
+          if (!self.active) { self.animFrame = null; return; }
+          var elapsed = now - startTime;
+          var progress = Math.min(elapsed / (duration * 1000), 1);
+          var eased = self.easeInOut(progress);
+          var scale = fromScale + (toScale - fromScale) * eased;
+          var orb = document.getElementById('breathOrb');
+          orb.style.transform = 'scale(' + scale + ')';
+          if (progress < 1) {
+            self.animFrame = requestAnimationFrame(frame);
+          } else {
+            self.animFrame = null;
+            if (onDone) onDone();
           }
         }
-        runPhase();
-      }, phase.duration);
-    }
+        self.animFrame = requestAnimationFrame(frame);
+      },
 
-    function endBreathing() {
-      if (breathingInterval) clearTimeout(breathingInterval);
-      document.getElementById('breathingInstruction').textContent = i18n.t('breathing.wellDone');
-      document.getElementById('breathingCounter').textContent = '';
-      document.getElementById('breathingCircle').className = 'breathing-circle';
-      document.getElementById('breathingEndBtn').style.display = 'none';
-      const params = new URLSearchParams(window.location.search);
-      const aspect = params.get('aspect') || 1;
-      setTimeout(() => App.navigate('results.html?aspect=' + aspect + '&overall=50'), 2000);
-    }
+      start: function () {
+        if (this.active) return;
+        this.active = true; this.cycle = 0;
+        this.secondsLeft = 180; this.totalCycles = Math.floor(180 / (this.INHALE + this.HOLD + this.EXHALE));
+        this.countValue = 0;
+        document.getElementById('breathStartBtn').style.display = 'none';
+        document.getElementById('breathStopBtn').style.display = '';
+        var orb = document.getElementById('breathOrb');
+        orb.style.transform = 'scale(1)';
+        orb.className = 'breath-orb idle';
+        document.getElementById('breathCount').textContent = '0';
+        this.createParticles();
+        this.timer = setInterval(function () { breathing.tick(); }, 1000);
+        var self = this;
+        requestAnimationFrame(function () { self.nextPhase(); });
+      },
 
-    function startBreathing() {
-      document.getElementById('breathingStartBtn').style.display = 'none';
-      document.getElementById('breathingEndBtn').style.display = 'block';
-      currentCycle = 1;
-      currentPhase = 0;
-      runPhase();
-    }
+      stop: function () {
+        this.active = false;
+        if (this.timer) { clearInterval(this.timer); this.timer = null; }
+        if (this.countInterval) { clearInterval(this.countInterval); this.countInterval = null; }
+        if (this.animFrame) { cancelAnimationFrame(this.animFrame); this.animFrame = null; }
+        var orb = document.getElementById('breathOrb');
+        orb.style.transform = 'scale(1)';
+        orb.className = 'breath-orb idle';
+        document.getElementById('breathCount').textContent = '0';
+        document.getElementById('breathProgress').style.width = '0%';
+        document.getElementById('breathStartBtn').style.display = '';
+        document.getElementById('breathStopBtn').style.display = 'none';
+        var p = document.getElementById('breathPhase');
+        p.className = 'breath-phase-label idle';
+        p.textContent = i18n.t ? i18n.t('breath.ready') : 'اضغط ابدأ';
+        document.getElementById('breathCycle').textContent = '0/0';
+        document.getElementById('breathTimer').textContent = '03:00';
+        var rings = document.querySelectorAll('.breath-ring, .breath-ring-stagger');
+        for (var i = 0; i < rings.length; i++) { rings[i].remove(); }
+        this.removeParticles();
+      },
+
+      tick: function () {
+        if (!this.active) return;
+        this.secondsLeft--;
+        var m = String(Math.floor(this.secondsLeft / 60)).padStart(2, '0');
+        var s = String(this.secondsLeft % 60).padStart(2, '0');
+        document.getElementById('breathTimer').textContent = m + ':' + s;
+        var pct = ((this.totalSeconds - this.secondsLeft) / this.totalSeconds) * 100;
+        document.getElementById('breathProgress').style.width = Math.min(pct, 100) + '%';
+        if (this.secondsLeft <= 0) {
+          this.stop();
+          var phase = document.getElementById('breathPhase');
+          phase.className = 'breath-phase-label idle';
+          phase.textContent = i18n.t ? i18n.t('breath.complete') : 'أحسنت!';
+          document.getElementById('breathProgress').style.width = '100%';
+        }
+      },
+
+      resetCount: function (max) {
+        this.countValue = max;
+        if (this.countInterval) { clearInterval(this.countInterval); this.countInterval = null; }
+        document.getElementById('breathCount').textContent = this.countValue;
+        var self = this;
+        this.countInterval = setInterval(function () {
+          self.countValue--;
+          document.getElementById('breathCount').textContent = Math.max(self.countValue, 0);
+        }, 1000);
+      },
+
+      nextPhase: function () {
+        if (!this.active) return;
+        var self = this;
+        var orb = document.getElementById('breathOrb');
+        var phase = document.getElementById('breathPhase');
+        var rings = document.querySelectorAll('.breath-ring, .breath-ring-stagger');
+        for (var i = 0; i < rings.length; i++) { rings[i].remove(); }
+
+        if (this.phase === 'idle') {
+          this.phase = 'inhale'; this.cycle++;
+          orb.className = 'breath-orb inhale';
+          phase.className = 'breath-phase-label inhale';
+          phase.textContent = i18n.t ? i18n.t('breath.inhale') : 'شهيق';
+          this.addRings('wave-inhale');
+          document.getElementById('breathCycle').textContent = this.cycle + '/' + this.totalCycles;
+          this.resetCount(self.INHALE);
+          this.animateOrb(1, 1.538, this.INHALE, function () { self.nextPhase(); });
+        } else if (this.phase === 'inhale') {
+          this.phase = 'hold';
+          orb.className = 'breath-orb hold';
+          phase.className = 'breath-phase-label hold';
+          phase.textContent = i18n.t ? i18n.t('breath.hold') : 'احبس النفس';
+          this.addRings('wave-hold');
+          this.resetCount(self.HOLD);
+          setTimeout(function () { self.nextPhase(); }, self.HOLD * 1000);
+        } else if (this.phase === 'hold') {
+          this.phase = 'exhale';
+          orb.className = 'breath-orb exhale';
+          phase.className = 'breath-phase-label exhale';
+          phase.textContent = i18n.t ? i18n.t('breath.exhale') : 'زفير';
+          this.addRings('wave-exhale');
+          this.resetCount(self.EXHALE);
+          this.animateOrb(1.538, 1, this.EXHALE, function () { self.nextPhase(); });
+        } else if (this.phase === 'exhale') {
+          this.phase = 'inhale'; this.cycle++;
+          orb.className = 'breath-orb inhale';
+          phase.className = 'breath-phase-label inhale';
+          phase.textContent = i18n.t ? i18n.t('breath.inhale') : 'شهيق';
+          this.addRings('wave-inhale');
+          document.getElementById('breathCycle').textContent = this.cycle + '/' + this.totalCycles;
+          this.resetCount(self.INHALE);
+          this.animateOrb(1, 1.538, this.INHALE, function () { self.nextPhase(); });
+        }
+      },
+
+      addRings: function (className) {
+        var wrap = document.getElementById('orbWrap');
+        if (!wrap) return;
+        var dur = className === 'wave-inhale' ? 4000 : className === 'wave-hold' ? 7000 : 8000;
+        var count = 3;
+        for (var i = 0; i < count; i++) {
+          var ring = document.createElement('div');
+          var delay = i * (dur / (count * 2));
+          if (i === 0) { ring.className = 'breath-ring ' + className; }
+          else { ring.className = 'breath-ring-stagger s' + i; }
+          ring.style.animationDelay = delay + 'ms';
+          ring.style.animationDuration = (dur - delay) + 'ms';
+          wrap.appendChild(ring);
+          setTimeout(function (r) { return function () { if (r.parentNode) r.parentNode.removeChild(r); }; }(ring), dur);
+        }
+      }
+    };
+    function startBreathing() { breathing.start(); }
+    function stopBreathing() { breathing.stop(); }
   </script>
 </body>
 </html>

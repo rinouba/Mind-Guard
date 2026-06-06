@@ -1,0 +1,47 @@
+{
+  "exercise.coherence.inhale": { "ar": "شهيق", "en": "Inhale" },
+  "exercise.coherence.exhale": { "ar": "زفير", "en": "Exhale" },
+  "exercise.coherence.instruction": { "ar": "اتبع حركة الدائرة، تنفس ببطء", "en": "Follow the circle, breathe slowly" },
+  "exercise.coherence.time": { "ar": "الوقت المتبقي: {time}", "en": "Time remaining: {time}" },
+
+  "exercise.hrv.instruction": { "ar": "ركز على منطقة القلب وتنفس بانتظام", "en": "Focus on your heart area and breathe steadily" },
+  "exercise.hrv.title": { "ar": "تماسك القلب (HRV)", "en": "Heart Coherence (HRV)" },
+  "exercise.hrv.timeRemaining": { "ar": "متبقي: {time}", "en": "Remaining: {time}" },
+  "exercise.hrv.done": { "ar": "أحسنت! أكملت تمرين HRV", "en": "Well done! HRV exercise complete" },
+
+  "exercise.cooldown.locked": { "ar": "مقفل 24 ساعة", "en": "Locked 24h" },
+  "exercise.cooldown.remaining": { "ar": "متبقي: {time}", "en": "Remaining: {time}" },
+  "exercise.cooldown.unlocked": { "ar": "متاح", "en": "Available" },
+
+  "exercise.btn.start": { "ar": "ابدأ التمرين", "en": "Start Exercise" },
+  "exercise.btn.stop": { "ar": "إنهاء التمرين", "en": "End Exercise" },
+  "exercise.btn.close": { "ar": "إغلاق", "en": "Close" },
+
+  "vitals.title": { "ar": "المؤشرات الحيوية اليومية", "en": "Daily Vital Signs" },
+  "vitals.subtitle": { "ar": "سجل مؤشراتك الحيوية لليوم", "en": "Record your vital signs for today" },
+  "vitals.heart.label": { "ar": "معدل نبض القلب", "en": "Heart Rate" },
+  "vitals.heart.unit": { "ar": "نبضة/دقيقة", "en": "bpm" },
+  "vitals.heart.placeholder": { "ar": "مثلاً 72", "en": "e.g. 72" },
+  "vitals.respiration.label": { "ar": "معدل التنفس", "en": "Respiration Rate" },
+  "vitals.respiration.unit": { "ar": "نفس/دقيقة", "en": "breaths/min" },
+  "vitals.respiration.placeholder": { "ar": "مثلاً 16", "en": "e.g. 16" },
+  "vitals.sleep.label": { "ar": "ساعات النوم", "en": "Sleep Hours" },
+  "vitals.sleep.unit": { "ar": "ساعة", "en": "hours" },
+  "vitals.sleep.placeholder": { "ar": "مثلاً 7.5", "en": "e.g. 7.5" },
+  "vitals.save": { "ar": "حفظ المؤشرات", "en": "Save Vitals" },
+  "vitals.skip": { "ar": "تخطي", "en": "Skip" },
+  "vitals.saved": { "ar": "تم حفظ المؤشرات الحيوية", "en": "Vital signs saved" },
+  "vitals.error": { "ar": "يرجى إدخال قيم صحيحة", "en": "Please enter valid values" },
+  "vitals.range.heart": { "ar": "60-100", "en": "60-100" },
+  "vitals.range.respiration": { "ar": "12-20", "en": "12-20" },
+  "vitals.range.sleep": { "ar": "7-9", "en": "7-9" },
+
+  "dashboard.alert.title": { "ar": "المؤشرات الحيوية", "en": "Vital Signs" },
+  "dashboard.alert.normal": { "ar": "مؤشراتك الحيوية مستقرة اليوم", "en": "Your vitals are stable today" },
+  "dashboard.alert.abnormal": { "ar": "انتباه: {value} خارج النطاق الطبيعي ({range})", "en": "Attention: {value} is outside normal range ({range})" },
+  "dashboard.alert.missing": { "ar": "لم تسجل مؤشراتك اليوم", "en": "Vitals not recorded today" },
+  "dashboard.alert.enter": { "ar": "سجل الآن", "en": "Enter Now" },
+  "dashboard.alert.heart": { "ar": "نبض القلب", "en": "Heart Rate" },
+  "dashboard.alert.respiration": { "ar": "معدل التنفس", "en": "Respiration" },
+  "dashboard.alert.sleep": { "ar": "ساعات النوم", "en": "Sleep" }
+}

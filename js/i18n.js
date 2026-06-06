@@ -163,276 +163,476 @@ const QUESTIONS_EN = {
   1: {
     name: "Physiological Aspect",
     questions: [
-      {
-        id: 1,
-        text: "How would you describe your sleep quality on most nights?",
-        options: [
-          { key: "A", text: "Excellent", points: 4 },
-          { key: "B", text: "Good", points: 3 },
-          { key: "C", text: "Average", points: 2 },
-          { key: "D", text: "Poor", points: 1 }
-        ]
-      },
-      {
-        id: 2,
-        text: "Do you frequently feel tired or physically exhausted without a clear reason?",
-        options: [
-          { key: "A", text: "Rarely", points: 4 },
-          { key: "B", text: "Sometimes", points: 3 },
-          { key: "C", text: "Often", points: 2 },
-          { key: "D", text: "Always", points: 1 }
-        ]
-      },
-      {
-        id: 3,
-        text: "How regularly do you engage in physical activity during the week?",
-        options: [
-          { key: "A", text: "Regularly", points: 4 },
-          { key: "B", text: "Sometimes", points: 3 },
-          { key: "C", text: "Rarely", points: 2 },
-          { key: "D", text: "Never", points: 1 }
-        ]
-      },
-      {
-        id: 4,
-        text: "Have you noticed any significant changes in your appetite or weight recently?",
-        options: [
-          { key: "A", text: "None", points: 4 },
-          { key: "B", text: "Slight", points: 3 },
-          { key: "C", text: "Noticeable", points: 2 },
-          { key: "D", text: "Significant", points: 1 }
-        ]
-      },
-      {
-        id: 5,
-        text: "Do you suffer from recurrent physical pain (headaches, back pain, digestive issues) with no medical explanation?",
-        options: [
-          { key: "A", text: "Rarely", points: 4 },
-          { key: "B", text: "Sometimes", points: 3 },
-          { key: "C", text: "Often", points: 2 },
-          { key: "D", text: "Always", points: 1 }
-        ]
-      }
+      { id: 1, text: "How would you describe your sleep quality on most nights?", options: [
+        { key: "A", text: "Excellent", points: 4 }, { key: "B", text: "Good", points: 3 }, { key: "C", text: "Average", points: 2 }, { key: "D", text: "Poor", points: 1 }
+      ]},
+      { id: 2, text: "Do you frequently feel tired or physically exhausted without a clear reason?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 3, text: "How regularly do you engage in physical activity during the week?", options: [
+        { key: "A", text: "Regularly", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Rarely", points: 2 }, { key: "D", text: "Never", points: 1 }
+      ]},
+      { id: 4, text: "Have you noticed any significant changes in your appetite or weight recently?", options: [
+        { key: "A", text: "None", points: 4 }, { key: "B", text: "Slight", points: 3 }, { key: "C", text: "Noticeable", points: 2 }, { key: "D", text: "Significant", points: 1 }
+      ]},
+      { id: 5, text: "Do you suffer from recurrent physical pain (headaches, back pain, digestive issues) with no medical explanation?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 6, text: "How would you rate your overall energy level during the day?", options: [
+        { key: "A", text: "High", points: 4 }, { key: "B", text: "Good", points: 3 }, { key: "C", text: "Low", points: 2 }, { key: "D", text: "Very low", points: 1 }
+      ]},
+      { id: 7, text: "Do you feel muscle tension or stiffness without a clear cause?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 8, text: "How often have you suffered from headaches over the past month?", options: [
+        { key: "A", text: "Not at all", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Constantly", points: 1 }
+      ]},
+      { id: 9, text: "Do you suffer from digestive or gastrointestinal issues?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 10, text: "Do you notice changes in your breathing pattern (rapid or shallow) when stressed?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 11, text: "How easily can you physically relax when you want to?", options: [
+        { key: "A", text: "Easily", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "With difficulty", points: 2 }, { key: "D", text: "I cannot", points: 1 }
+      ]},
+      { id: 12, text: "Do you feel refreshed after rest or sleep?", options: [
+        { key: "A", text: "Always", points: 4 }, { key: "B", text: "Often", points: 3 }, { key: "C", text: "Sometimes", points: 2 }, { key: "D", text: "Rarely", points: 1 }
+      ]},
+      { id: 13, text: "Do you struggle to wake up in the morning feeling energetic?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 14, text: "How regular are your daily meals?", options: [
+        { key: "A", text: "Very regular", points: 4 }, { key: "B", text: "Regular", points: 3 }, { key: "C", text: "Irregular", points: 2 }, { key: "D", text: "Erratic", points: 1 }
+      ]},
+      { id: 15, text: "Do you experience physical symptoms (racing heart, sweating, shaking) when anxious?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 16, text: "How often do you feel sluggish or physically lazy during the day?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 17, text: "Do you engage in physical activities that you enjoy?", options: [
+        { key: "A", text: "Regularly", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Rarely", points: 2 }, { key: "D", text: "Never", points: 1 }
+      ]},
+      { id: 18, text: "Do you suffer from sleep disturbances such as insomnia or frequent waking?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 19, text: "How resistant is your immune system (how often do you catch colds or get sick)?", options: [
+        { key: "A", text: "Rarely get sick", points: 4 }, { key: "B", text: "Get sick sometimes", points: 3 }, { key: "C", text: "Often get sick", points: 2 }, { key: "D", text: "Constantly sick", points: 1 }
+      ]},
+      { id: 20, text: "Does your mood improve after physical exercise?", options: [
+        { key: "A", text: "Always", points: 4 }, { key: "B", text: "Often", points: 3 }, { key: "C", text: "Sometimes", points: 2 }, { key: "D", text: "I don't exercise", points: 1 }
+      ]},
+      { id: 21, text: "How aware are you of the physical signals your body sends you (hunger, fatigue, pain)?", options: [
+        { key: "A", text: "Very aware", points: 4 }, { key: "B", text: "Aware", points: 3 }, { key: "C", text: "Slightly aware", points: 2 }, { key: "D", text: "Unaware", points: 1 }
+      ]},
+      { id: 22, text: "Do you find yourself feeling tired after minimal effort?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 23, text: "How would you describe your appetite for food?", options: [
+        { key: "A", text: "Very good", points: 4 }, { key: "B", text: "Good", points: 3 }, { key: "C", text: "Poor", points: 2 }, { key: "D", text: "Very poor", points: 1 }
+      ]},
+      { id: 24, text: "Do you experience stomach or intestinal discomfort linked to stress?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 25, text: "How satisfied are you with your level of physical fitness?", options: [
+        { key: "A", text: "Very satisfied", points: 4 }, { key: "B", text: "Satisfied", points: 3 }, { key: "C", text: "Dissatisfied", points: 2 }, { key: "D", text: "Very dissatisfied", points: 1 }
+      ]},
+      { id: 26, text: "Do you have difficulty breathing deeply or feel tightness in your chest?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 27, text: "How much does your sleep get affected by disturbing thoughts or anxiety?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 28, text: "Do you notice yourself breathing rapidly or shallowly without physical exertion?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 29, text: "How physically comfortable do you feel at the end of the day?", options: [
+        { key: "A", text: "Very comfortable", points: 4 }, { key: "B", text: "Comfortable", points: 3 }, { key: "C", text: "Tired", points: 2 }, { key: "D", text: "Exhausted", points: 1 }
+      ]},
+      { id: 30, text: "Do you rely on stimulants (caffeine, energy drinks) to get through your day?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]}
     ]
   },
   2: {
     name: "Behavioral Aspect",
     questions: [
-      {
-        id: 1,
-        text: "How easy is it for you to perform daily tasks and activities that require effort?",
-        options: [
-          { key: "A", text: "Very easy", points: 4 },
-          { key: "B", text: "Easy", points: 3 },
-          { key: "C", text: "Sometimes difficult", points: 2 },
-          { key: "D", text: "Very difficult", points: 1 }
-        ]
-      },
-      {
-        id: 2,
-        text: "Do you find yourself avoiding social situations or activities you used to enjoy?",
-        options: [
-          { key: "A", text: "Rarely", points: 4 },
-          { key: "B", text: "Sometimes", points: 3 },
-          { key: "C", text: "Often", points: 2 },
-          { key: "D", text: "Always", points: 1 }
-        ]
-      },
-      {
-        id: 3,
-        text: "How well can you focus and complete tasks that require attention?",
-        options: [
-          { key: "A", text: "Very well", points: 4 },
-          { key: "B", text: "Well", points: 3 },
-          { key: "C", text: "Sometimes poorly", points: 2 },
-          { key: "D", text: "Very poorly", points: 1 }
-        ]
-      },
-      {
-        id: 4,
-        text: "Do you resort to certain behaviors (overeating, smoking, isolation) to cope with stress?",
-        options: [
-          { key: "A", text: "Rarely", points: 4 },
-          { key: "B", text: "Sometimes", points: 3 },
-          { key: "C", text: "Often", points: 2 },
-          { key: "D", text: "Always", points: 1 }
-        ]
-      },
-      {
-        id: 5,
-        text: "How motivated do you feel to achieve your goals or start new projects?",
-        options: [
-          { key: "A", text: "Very motivated", points: 4 },
-          { key: "B", text: "Motivated", points: 3 },
-          { key: "C", text: "Slightly motivated", points: 2 },
-          { key: "D", text: "Not motivated", points: 1 }
-        ]
-      }
+      { id: 1, text: "How easy is it for you to perform daily tasks and activities that require effort?", options: [
+        { key: "A", text: "Very easy", points: 4 }, { key: "B", text: "Easy", points: 3 }, { key: "C", text: "Sometimes difficult", points: 2 }, { key: "D", text: "Very difficult", points: 1 }
+      ]},
+      { id: 2, text: "Do you find yourself avoiding social situations or activities you used to enjoy?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 3, text: "How well can you focus and complete tasks that require attention?", options: [
+        { key: "A", text: "Very well", points: 4 }, { key: "B", text: "Well", points: 3 }, { key: "C", text: "Sometimes poorly", points: 2 }, { key: "D", text: "Very poorly", points: 1 }
+      ]},
+      { id: 4, text: "Do you resort to certain behaviors (overeating, smoking, isolation) to cope with stress?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 5, text: "How motivated do you feel to achieve your goals or start new projects?", options: [
+        { key: "A", text: "Very motivated", points: 4 }, { key: "B", text: "Motivated", points: 3 }, { key: "C", text: "Slightly motivated", points: 2 }, { key: "D", text: "Not motivated", points: 1 }
+      ]},
+      { id: 6, text: "Do you procrastinate on important tasks and delay them?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 7, text: "How organized is your time and daily schedule?", options: [
+        { key: "A", text: "Very organized", points: 4 }, { key: "B", text: "Organized", points: 3 }, { key: "C", text: "Disorganized", points: 2 }, { key: "D", text: "Chaotic", points: 1 }
+      ]},
+      { id: 8, text: "Do you maintain a consistent daily routine (sleep, meals, work)?", options: [
+        { key: "A", text: "Always", points: 4 }, { key: "B", text: "Often", points: 3 }, { key: "C", text: "Sometimes", points: 2 }, { key: "D", text: "Rarely", points: 1 }
+      ]},
+      { id: 9, text: "How much attention do you pay to your personal hygiene and grooming?", options: [
+        { key: "A", text: "Very attentive", points: 4 }, { key: "B", text: "Attentive", points: 3 }, { key: "C", text: "Slightly attentive", points: 2 }, { key: "D", text: "Inattentive", points: 1 }
+      ]},
+      { id: 10, text: "Do you find it difficult to control your impulses or reactions?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 11, text: "Do you ask for help when you struggle with a task?", options: [
+        { key: "A", text: "Always", points: 4 }, { key: "B", text: "Often", points: 3 }, { key: "C", text: "Sometimes", points: 2 }, { key: "D", text: "Rarely", points: 1 }
+      ]},
+      { id: 12, text: "How productive are you at work or study?", options: [
+        { key: "A", text: "Very high", points: 4 }, { key: "B", text: "High", points: 3 }, { key: "C", text: "Low", points: 2 }, { key: "D", text: "Very low", points: 1 }
+      ]},
+      { id: 13, text: "Do you make time for recreational activities and hobbies?", options: [
+        { key: "A", text: "Regularly", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Rarely", points: 2 }, { key: "D", text: "Never", points: 1 }
+      ]},
+      { id: 14, text: "Do you struggle to meet deadlines or complete tasks?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 15, text: "How well do you adapt to sudden changes in your routine?", options: [
+        { key: "A", text: "Easily", points: 4 }, { key: "B", text: "With slight difficulty", points: 3 }, { key: "C", text: "With difficulty", points: 2 }, { key: "D", text: "I cannot adapt", points: 1 }
+      ]},
+      { id: 16, text: "Do you excessively use your phone or social media?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 17, text: "Do you find it difficult to prioritize your daily tasks?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 18, text: "How committed are you to a healthy routine (early sleep, healthy eating, exercise)?", options: [
+        { key: "A", text: "Very committed", points: 4 }, { key: "B", text: "Committed", points: 3 }, { key: "C", text: "Uncommitted", points: 2 }, { key: "D", text: "Neglectful", points: 1 }
+      ]},
+      { id: 19, text: "Do you try new activities or step outside your comfort zone?", options: [
+        { key: "A", text: "Regularly", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Rarely", points: 2 }, { key: "D", text: "Never", points: 1 }
+      ]},
+      { id: 20, text: "Do you find yourself multitasking without completing any task?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 21, text: "How strong is your ability to resist temptations (unhealthy food, overspending, etc.)?", options: [
+        { key: "A", text: "Very strong", points: 4 }, { key: "B", text: "Strong", points: 3 }, { key: "C", text: "Weak", points: 2 }, { key: "D", text: "Very weak", points: 1 }
+      ]},
+      { id: 22, text: "Do you find it hard to start daily activities (waking up, showering, going out)?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 23, text: "Do you feel bored or empty during your free time?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 24, text: "How consistently do you follow through on the plans and goals you set for yourself?", options: [
+        { key: "A", text: "Consistently", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "I give up", points: 2 }, { key: "D", text: "I don't set plans", points: 1 }
+      ]},
+      { id: 25, text: "Do you find it hard to relax or sit still without doing something?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 26, text: "Do you tend to withdraw from difficult situations rather than face them?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 27, text: "How well can you maintain focus on a single task for an extended period?", options: [
+        { key: "A", text: "Very well", points: 4 }, { key: "B", text: "Well", points: 3 }, { key: "C", text: "Poorly", points: 2 }, { key: "D", text: "Very poorly", points: 1 }
+      ]},
+      { id: 28, text: "Do your negative emotions affect your performance at work or study?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 29, text: "Do you find it difficult to finish projects or tasks you start?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 30, text: "How satisfied do you feel with what you accomplish on a daily basis?", options: [
+        { key: "A", text: "Very satisfied", points: 4 }, { key: "B", text: "Satisfied", points: 3 }, { key: "C", text: "Dissatisfied", points: 2 }, { key: "D", text: "Very dissatisfied", points: 1 }
+      ]}
     ]
   },
   3: {
     name: "Social Aspect",
     questions: [
-      {
-        id: 1,
-        text: "How satisfied are you with your social relationships (friends, family, colleagues)?",
-        options: [
-          { key: "A", text: "Very satisfied", points: 4 },
-          { key: "B", text: "Satisfied", points: 3 },
-          { key: "C", text: "Dissatisfied", points: 2 },
-          { key: "D", text: "Very dissatisfied", points: 1 }
-        ]
-      },
-      {
-        id: 2,
-        text: "Do you feel supported and appreciated by the important people in your life?",
-        options: [
-          { key: "A", text: "Always", points: 4 },
-          { key: "B", text: "Often", points: 3 },
-          { key: "C", text: "Sometimes", points: 2 },
-          { key: "D", text: "Rarely", points: 1 }
-        ]
-      },
-      {
-        id: 3,
-        text: "How easy is it for you to communicate with others and express your feelings and needs?",
-        options: [
-          { key: "A", text: "Very easy", points: 4 },
-          { key: "B", text: "Easy", points: 3 },
-          { key: "C", text: "Sometimes difficult", points: 2 },
-          { key: "D", text: "Very difficult", points: 1 }
-        ]
-      },
-      {
-        id: 4,
-        text: "Do you regularly participate in social or community activities?",
-        options: [
-          { key: "A", text: "Regularly", points: 4 },
-          { key: "B", text: "Sometimes", points: 3 },
-          { key: "C", text: "Rarely", points: 2 },
-          { key: "D", text: "I don't participate", points: 1 }
-        ]
-      },
-      {
-        id: 5,
-        text: "Do you feel a sense of belonging to a particular group or community?",
-        options: [
-          { key: "A", text: "Yes, strongly", points: 4 },
-          { key: "B", text: "Yes, generally", points: 3 },
-          { key: "C", text: "No, I feel disconnected", points: 2 },
-          { key: "D", text: "I don't think about it", points: 1 }
-        ]
-      }
+      { id: 1, text: "How satisfied are you with your social relationships (friends, family, colleagues)?", options: [
+        { key: "A", text: "Very satisfied", points: 4 }, { key: "B", text: "Satisfied", points: 3 }, { key: "C", text: "Dissatisfied", points: 2 }, { key: "D", text: "Very dissatisfied", points: 1 }
+      ]},
+      { id: 2, text: "Do you feel supported and appreciated by the important people in your life?", options: [
+        { key: "A", text: "Always", points: 4 }, { key: "B", text: "Often", points: 3 }, { key: "C", text: "Sometimes", points: 2 }, { key: "D", text: "Rarely", points: 1 }
+      ]},
+      { id: 3, text: "How easy is it for you to communicate with others and express your feelings and needs?", options: [
+        { key: "A", text: "Very easy", points: 4 }, { key: "B", text: "Easy", points: 3 }, { key: "C", text: "Sometimes difficult", points: 2 }, { key: "D", text: "Very difficult", points: 1 }
+      ]},
+      { id: 4, text: "Do you regularly participate in social or community activities?", options: [
+        { key: "A", text: "Regularly", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Rarely", points: 2 }, { key: "D", text: "I don't participate", points: 1 }
+      ]},
+      { id: 5, text: "Do you feel a sense of belonging to a particular group or community?", options: [
+        { key: "A", text: "Yes, strongly", points: 4 }, { key: "B", text: "Yes, generally", points: 3 }, { key: "C", text: "No, I feel disconnected", points: 2 }, { key: "D", text: "I don't think about it", points: 1 }
+      ]},
+      { id: 6, text: "Do you feel lonely or isolated even when people are around you?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 7, text: "How confident are you in your ability to make new friends?", options: [
+        { key: "A", text: "Very confident", points: 4 }, { key: "B", text: "Confident", points: 3 }, { key: "C", text: "Not confident", points: 2 }, { key: "D", text: "Not confident at all", points: 1 }
+      ]},
+      { id: 8, text: "Do you feel nervous or anxious in social situations?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 9, text: "How good are your conflict resolution skills with others?", options: [
+        { key: "A", text: "Very good", points: 4 }, { key: "B", text: "Good", points: 3 }, { key: "C", text: "Poor", points: 2 }, { key: "D", text: "Very poor", points: 1 }
+      ]},
+      { id: 10, text: "Do you feel that others understand you and value your perspective?", options: [
+        { key: "A", text: "Always", points: 4 }, { key: "B", text: "Often", points: 3 }, { key: "C", text: "Sometimes", points: 2 }, { key: "D", text: "Rarely", points: 1 }
+      ]},
+      { id: 11, text: "How often do you communicate with your family members?", options: [
+        { key: "A", text: "Continuously", points: 4 }, { key: "B", text: "Weekly", points: 3 }, { key: "C", text: "Monthly", points: 2 }, { key: "D", text: "Rarely", points: 1 }
+      ]},
+      { id: 12, text: "Do you feel comfortable asking others for help?", options: [
+        { key: "A", text: "Always", points: 4 }, { key: "B", text: "Often", points: 3 }, { key: "C", text: "Sometimes", points: 2 }, { key: "D", text: "Rarely", points: 1 }
+      ]},
+      { id: 13, text: "Do you have someone you trust to share your feelings and thoughts with?", options: [
+        { key: "A", text: "Yes, multiple people", points: 4 }, { key: "B", text: "Yes, one person", points: 3 }, { key: "C", text: "No, not currently", points: 2 }, { key: "D", text: "No, never", points: 1 }
+      ]},
+      { id: 14, text: "How confident do you feel speaking in front of a group of people?", options: [
+        { key: "A", text: "Very confident", points: 4 }, { key: "B", text: "Confident", points: 3 }, { key: "C", text: "Anxious", points: 2 }, { key: "D", text: "Very fearful", points: 1 }
+      ]},
+      { id: 15, text: "Do you feel that others take advantage of you or don't appreciate you?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 16, text: "How easy is it for you to say 'no' to others when you want to?", options: [
+        { key: "A", text: "Very easy", points: 4 }, { key: "B", text: "Easy", points: 3 }, { key: "C", text: "Difficult", points: 2 }, { key: "D", text: "Very difficult", points: 1 }
+      ]},
+      { id: 17, text: "Do you feel jealous or experience unhealthy competition with others?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 18, text: "How satisfied are you with your role in your social circle (family, work, friends)?", options: [
+        { key: "A", text: "Very satisfied", points: 4 }, { key: "B", text: "Satisfied", points: 3 }, { key: "C", text: "Dissatisfied", points: 2 }, { key: "D", text: "Very dissatisfied", points: 1 }
+      ]},
+      { id: 19, text: "Do you prefer isolation and avoid social gatherings?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 20, text: "Do you find it difficult to understand others' feelings or empathize with them?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 21, text: "How good are your relationships at work or school?", options: [
+        { key: "A", text: "Excellent", points: 4 }, { key: "B", text: "Good", points: 3 }, { key: "C", text: "Average", points: 2 }, { key: "D", text: "Poor", points: 1 }
+      ]},
+      { id: 22, text: "Do you feel social pressure to be a certain way?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 23, text: "Do you initiate contact with others or wait for them to reach out?", options: [
+        { key: "A", text: "I always initiate", points: 4 }, { key: "B", text: "I sometimes initiate", points: 3 }, { key: "C", text: "I usually wait", points: 2 }, { key: "D", text: "I always wait", points: 1 }
+      ]},
+      { id: 24, text: "How much do your relationships get affected by your psychological state?", options: [
+        { key: "A", text: "Not affected", points: 4 }, { key: "B", text: "Slightly", points: 3 }, { key: "C", text: "Noticeably", points: 2 }, { key: "D", text: "Significantly", points: 1 }
+      ]},
+      { id: 25, text: "Do you feel you have a strong social support network?", options: [
+        { key: "A", text: "Yes, very strong", points: 4 }, { key: "B", text: "Yes, acceptable", points: 3 }, { key: "C", text: "Weak", points: 2 }, { key: "D", text: "Nonexistent", points: 1 }
+      ]},
+      { id: 26, text: "Do you interact with others' posts or communicate via social media?", options: [
+        { key: "A", text: "Regularly", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Rarely", points: 2 }, { key: "D", text: "Never", points: 1 }
+      ]},
+      { id: 27, text: "Do you fear being judged by others?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 28, text: "How easily can you forgive and move past conflicts with others?", options: [
+        { key: "A", text: "Easily", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "With difficulty", points: 2 }, { key: "D", text: "I cannot", points: 1 }
+      ]},
+      { id: 29, text: "Do you feel grateful for the people in your life?", options: [
+        { key: "A", text: "Always", points: 4 }, { key: "B", text: "Often", points: 3 }, { key: "C", text: "Sometimes", points: 2 }, { key: "D", text: "Rarely", points: 1 }
+      ]},
+      { id: 30, text: "Do past disappointments affect your current trust in others?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]}
     ]
   },
   4: {
     name: "Emotional Aspect",
     questions: [
-      {
-        id: 1,
-        text: "How often do you feel sad, hopeless, or lose interest in things?",
-        options: [
-          { key: "A", text: "Rarely", points: 4 },
-          { key: "B", text: "Sometimes", points: 3 },
-          { key: "C", text: "Often", points: 2 },
-          { key: "D", text: "Always", points: 1 }
-        ]
-      },
-      {
-        id: 2,
-        text: "Do you find it difficult to control your emotions (anger, anxiety, sadness)?",
-        options: [
-          { key: "A", text: "Rarely", points: 4 },
-          { key: "B", text: "Sometimes", points: 3 },
-          { key: "C", text: "Often", points: 2 },
-          { key: "D", text: "Always", points: 1 }
-        ]
-      },
-      {
-        id: 3,
-        text: "How relaxed and calm do you feel in your daily life?",
-        options: [
-          { key: "A", text: "Always", points: 4 },
-          { key: "B", text: "Often", points: 3 },
-          { key: "C", text: "Sometimes", points: 2 },
-          { key: "D", text: "Rarely", points: 1 }
-        ]
-      },
-      {
-        id: 4,
-        text: "Do you feel excessively anxious or stressed about the future or daily events?",
-        options: [
-          { key: "A", text: "Rarely", points: 4 },
-          { key: "B", text: "Sometimes", points: 3 },
-          { key: "C", text: "Often", points: 2 },
-          { key: "D", text: "Always", points: 1 }
-        ]
-      },
-      {
-        id: 5,
-        text: "How well can you enjoy positive moments and feel happiness?",
-        options: [
-          { key: "A", text: "Very well", points: 4 },
-          { key: "B", text: "Well", points: 3 },
-          { key: "C", text: "Sometimes poorly", points: 2 },
-          { key: "D", text: "Very poorly", points: 1 }
-        ]
-      }
+      { id: 1, text: "How often do you feel sad, hopeless, or lose interest in things?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 2, text: "Do you find it difficult to control your emotions (anger, anxiety, sadness)?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 3, text: "How relaxed and calm do you feel in your daily life?", options: [
+        { key: "A", text: "Always", points: 4 }, { key: "B", text: "Often", points: 3 }, { key: "C", text: "Sometimes", points: 2 }, { key: "D", text: "Rarely", points: 1 }
+      ]},
+      { id: 4, text: "Do you feel excessively anxious or stressed about the future or daily events?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 5, text: "How well can you enjoy positive moments and feel happiness?", options: [
+        { key: "A", text: "Very well", points: 4 }, { key: "B", text: "Well", points: 3 }, { key: "C", text: "Sometimes poorly", points: 2 }, { key: "D", text: "Very poorly", points: 1 }
+      ]},
+      { id: 6, text: "Do you experience severe mood swings without a clear reason?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 7, text: "How frustrated do you feel when things don't go your way?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 8, text: "Do you find it difficult to recover from difficult emotional situations?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 9, text: "How often do you feel angry or irritable over minor things?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 10, text: "Do you feel excessive fear or apprehension about events that haven't happened yet?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 11, text: "How well can you empathize with others and understand their feelings?", options: [
+        { key: "A", text: "Very well", points: 4 }, { key: "B", text: "Well", points: 3 }, { key: "C", text: "Poorly", points: 2 }, { key: "D", text: "Very poorly", points: 1 }
+      ]},
+      { id: 12, text: "Do you feel emotionally drained or that you give more than you receive?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 13, text: "How well can you control your emotional reactions in difficult situations?", options: [
+        { key: "A", text: "Very well", points: 4 }, { key: "B", text: "Well", points: 3 }, { key: "C", text: "Poorly", points: 2 }, { key: "D", text: "Very poorly", points: 1 }
+      ]},
+      { id: 14, text: "Are you overly sensitive to criticism or others' opinions of you?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 15, text: "Do you find it difficult to express your feelings to others?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 16, text: "How often do you feel guilty or engage in excessive self-blame?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 17, text: "Do you feel optimistic about your future?", options: [
+        { key: "A", text: "Always", points: 4 }, { key: "B", text: "Often", points: 3 }, { key: "C", text: "Sometimes", points: 2 }, { key: "D", text: "Rarely", points: 1 }
+      ]},
+      { id: 18, text: "How emotionally affected are you by negative news or events?", options: [
+        { key: "A", text: "Mildly", points: 4 }, { key: "B", text: "Moderately", points: 3 }, { key: "C", text: "Greatly", points: 2 }, { key: "D", text: "Severely", points: 1 }
+      ]},
+      { id: 19, text: "Do you feel grateful for the good things in your life?", options: [
+        { key: "A", text: "Always", points: 4 }, { key: "B", text: "Often", points: 3 }, { key: "C", text: "Sometimes", points: 2 }, { key: "D", text: "Rarely", points: 1 }
+      ]},
+      { id: 20, text: "Do you find it hard to calm down after experiencing an upsetting situation?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 21, text: "How confident are you in your ability to handle difficult emotions?", options: [
+        { key: "A", text: "Very confident", points: 4 }, { key: "B", text: "Confident", points: 3 }, { key: "C", text: "Not confident", points: 2 }, { key: "D", text: "Not confident at all", points: 1 }
+      ]},
+      { id: 22, text: "Do you experience conflicting feelings toward the same people or situations?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 23, text: "Are you easily made to laugh or feel happy by others?", options: [
+        { key: "A", text: "Easily", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Rarely", points: 2 }, { key: "D", text: "Never", points: 1 }
+      ]},
+      { id: 24, text: "Do your negative emotions influence your daily decisions?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 25, text: "How much inner peace and satisfaction do you feel about your life?", options: [
+        { key: "A", text: "Very much", points: 4 }, { key: "B", text: "Much", points: 3 }, { key: "C", text: "Little", points: 2 }, { key: "D", text: "Very little", points: 1 }
+      ]},
+      { id: 26, text: "Do you find yourself crying easily or struggling to cry?", options: [
+        { key: "A", text: "Normal", points: 4 }, { key: "B", text: "I cry sometimes", points: 3 }, { key: "C", text: "I cry a lot", points: 2 }, { key: "D", text: "I cannot cry", points: 1 }
+      ]},
+      { id: 27, text: "Do you feel emotionally numb or disconnected from your feelings?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 28, text: "How well can you identify and name your emotions?", options: [
+        { key: "A", text: "Very well", points: 4 }, { key: "B", text: "Well", points: 3 }, { key: "C", text: "Poorly", points: 2 }, { key: "D", text: "Very poorly", points: 1 }
+      ]},
+      { id: 29, text: "Do you feel overwhelmed by the mix of emotions inside you?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 30, text: "Do you find that your emotions affect your physical health?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]}
     ]
   },
   5: {
     name: "Cognitive Aspect",
     questions: [
-      {
-        id: 1,
-        text: "Do you have difficulty making decisions, even simple ones?",
-        options: [
-          { key: "A", text: "Rarely", points: 4 },
-          { key: "B", text: "Sometimes", points: 3 },
-          { key: "C", text: "Often", points: 2 },
-          { key: "D", text: "Always", points: 1 }
-        ]
-      },
-      {
-        id: 2,
-        text: "How well can you remember new information or recent events?",
-        options: [
-          { key: "A", text: "Very well", points: 4 },
-          { key: "B", text: "Well", points: 3 },
-          { key: "C", text: "Sometimes poorly", points: 2 },
-          { key: "D", text: "Very poorly", points: 1 }
-        ]
-      },
-      {
-        id: 3,
-        text: "Do you feel your thoughts are negative or pessimistic most of the time?",
-        options: [
-          { key: "A", text: "Rarely", points: 4 },
-          { key: "B", text: "Sometimes", points: 3 },
-          { key: "C", text: "Often", points: 2 },
-          { key: "D", text: "Always", points: 1 }
-        ]
-      },
-      {
-        id: 4,
-        text: "How well can you solve problems and think clearly?",
-        options: [
-          { key: "A", text: "Very well", points: 4 },
-          { key: "B", text: "Well", points: 3 },
-          { key: "C", text: "Sometimes poorly", points: 2 },
-          { key: "D", text: "Very poorly", points: 1 }
-        ]
-      },
-      {
-        id: 5,
-        text: "Do you find yourself overthinking the same thoughts or events repeatedly?",
-        options: [
-          { key: "A", text: "Rarely", points: 4 },
-          { key: "B", text: "Sometimes", points: 3 },
-          { key: "C", text: "Often", points: 2 },
-          { key: "D", text: "Always", points: 1 }
-        ]
-      }
+      { id: 1, text: "Do you have difficulty making decisions, even simple ones?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 2, text: "How well can you remember new information or recent events?", options: [
+        { key: "A", text: "Very well", points: 4 }, { key: "B", text: "Well", points: 3 }, { key: "C", text: "Sometimes poorly", points: 2 }, { key: "D", text: "Very poorly", points: 1 }
+      ]},
+      { id: 3, text: "Do you feel your thoughts are negative or pessimistic most of the time?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 4, text: "How well can you solve problems and think clearly?", options: [
+        { key: "A", text: "Very well", points: 4 }, { key: "B", text: "Well", points: 3 }, { key: "C", text: "Sometimes poorly", points: 2 }, { key: "D", text: "Very poorly", points: 1 }
+      ]},
+      { id: 5, text: "Do you find yourself overthinking the same thoughts or events repeatedly?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 6, text: "Do you find it difficult to concentrate on a single task for an extended period?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 7, text: "Do you feel slow in thinking or have difficulty processing information?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 8, text: "Do you find it hard to see the positive side of situations?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 9, text: "Do you suffer from intrusive or disturbing thoughts that you cannot stop?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 10, text: "How well can you learn new skills or new information?", options: [
+        { key: "A", text: "Very well", points: 4 }, { key: "B", text: "Well", points: 3 }, { key: "C", text: "Poorly", points: 2 }, { key: "D", text: "Very poorly", points: 1 }
+      ]},
+      { id: 11, text: "Do you find it difficult to organize your thoughts?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 12, text: "Do you feel your thoughts are racing or crowded uncomfortably?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 13, text: "How well can you assess risks and make balanced decisions?", options: [
+        { key: "A", text: "Very well", points: 4 }, { key: "B", text: "Well", points: 3 }, { key: "C", text: "Poorly", points: 2 }, { key: "D", text: "Very poorly", points: 1 }
+      ]},
+      { id: 14, text: "Do you trust your ability to judge things correctly?", options: [
+        { key: "A", text: "Always", points: 4 }, { key: "B", text: "Often", points: 3 }, { key: "C", text: "Sometimes", points: 2 }, { key: "D", text: "Rarely", points: 1 }
+      ]},
+      { id: 15, text: "Do you find yourself comparing yourself to others negatively?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 16, text: "How easily can you let go of negative thoughts?", options: [
+        { key: "A", text: "Easily", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "With difficulty", points: 2 }, { key: "D", text: "I cannot", points: 1 }
+      ]},
+      { id: 17, text: "Do your anxious thoughts affect your ability to sleep?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 18, text: "How well can you see things from other people's perspectives?", options: [
+        { key: "A", text: "Very well", points: 4 }, { key: "B", text: "Well", points: 3 }, { key: "C", text: "Poorly", points: 2 }, { key: "D", text: "Very poorly", points: 1 }
+      ]},
+      { id: 19, text: "Do you frequently feel confused or mentally scattered?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 20, text: "How well can you plan for the future realistically?", options: [
+        { key: "A", text: "Very well", points: 4 }, { key: "B", text: "Well", points: 3 }, { key: "C", text: "Poorly", points: 2 }, { key: "D", text: "Very poorly", points: 1 }
+      ]},
+      { id: 21, text: "Do you find it hard to believe that good things can happen to you?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 22, text: "Do you blame yourself for things beyond your control?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 23, text: "How well can you learn from your mistakes rather than dwell on them?", options: [
+        { key: "A", text: "Very well", points: 4 }, { key: "B", text: "Well", points: 3 }, { key: "C", text: "Poorly", points: 2 }, { key: "D", text: "Very poorly", points: 1 }
+      ]},
+      { id: 24, text: "Do you feel your thoughts are irrational or exaggerated?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 25, text: "How well can you concentrate when reading or watching a movie without getting distracted?", options: [
+        { key: "A", text: "Very well", points: 4 }, { key: "B", text: "Well", points: 3 }, { key: "C", text: "Poorly", points: 2 }, { key: "D", text: "Very poorly", points: 1 }
+      ]},
+      { id: 26, text: "Do you overanalyze simple situations or other people's words?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 27, text: "Do you feel mental fog or difficulty generating new ideas?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 28, text: "How well can you accept constructive criticism and benefit from it?", options: [
+        { key: "A", text: "Very well", points: 4 }, { key: "B", text: "Well", points: 3 }, { key: "C", text: "Poorly", points: 2 }, { key: "D", text: "Very poorly", points: 1 }
+      ]},
+      { id: 29, text: "Do you feel that your thoughts negatively affect your self-confidence?", options: [
+        { key: "A", text: "Rarely", points: 4 }, { key: "B", text: "Sometimes", points: 3 }, { key: "C", text: "Often", points: 2 }, { key: "D", text: "Always", points: 1 }
+      ]},
+      { id: 30, text: "How well can you think creatively to solve problems?", options: [
+        { key: "A", text: "Very well", points: 4 }, { key: "B", text: "Well", points: 3 }, { key: "C", text: "Poorly", points: 2 }, { key: "D", text: "Very poorly", points: 1 }
+      ]}
     ]
   }
 };
@@ -569,6 +769,7 @@ i18n.translations = {
   'profile.menuPricing': { ar: 'الباقات', en: 'Packages' },
   'profile.menuExport': { ar: 'تصدير البيانات', en: 'Export Data' },
   'profile.menuClear': { ar: 'مسح جميع البيانات', en: 'Clear All Data' },
+  'profile.menuBreathing': { ar: 'تمارين التنفس (4-7-8)', en: 'Breathing Exercise (4-7-8)' },
 
   'modal.ok': { ar: 'حسناً', en: 'OK' },
   'modal.noAssessment': { ar: 'لم تقم بأي تقييم بعد', en: 'You haven\'t taken any assessment yet' },

@@ -33,6 +33,7 @@
   <script src="js/recommendations.js"></script>
   <script src="js/i18n.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/exercises.js"></script>
   <script>
     const params = new URLSearchParams(window.location.search);
     const aspect = parseInt(params.get('aspect')) || 1;
@@ -127,6 +128,7 @@
       Storage.saveAssessment(scores, lowest.key);
       Storage.remove('tempScores');
 
+      Exercises.lockExercise(aspect);
       const overallParam = score || avgScore;
       App.navigate(`results.html?aspect=${lowest.index}&overall=${overallParam}`);
     }

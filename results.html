@@ -6,6 +6,7 @@
   <meta name="theme-color" content="#5B8C85">
   <title>Mind Guard - النتائج</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style-additions.css">
 </head>
 <body>
   <div id="alertBanner" class="alert-banner hidden">
@@ -46,11 +47,12 @@
       <div id="recommendationsList"></div>
     </div>
 
-    <div class="results-actions">
-      <button class="btn btn-primary btn-lg btn-block" id="exerciseBtn" data-i18n="results.exerciseBtn">ابدأ التمرين المناسب</button>
-      <button class="btn btn-secondary btn-lg btn-block" onclick="App.navigate('progress.html')" data-i18n="results.showProgress">عرض التقدم</button>
+      <div class="results-actions">
+        <button class="btn btn-primary btn-lg btn-block" id="exerciseBtn" data-i18n="results.exerciseBtn">ابدأ التمرين المناسب</button>
+        <div id="cooldownBadgeContainer" style="text-align:center;margin-top:8px;min-height:24px;"></div>
+        <button class="btn btn-secondary btn-lg btn-block" onclick="App.navigate('progress.html')" data-i18n="results.showProgress">عرض التقدم</button>
+      </div>
     </div>
-  </div>
 
   <nav class="bottom-nav">
     <a href="index.html"><i class="fas fa-home"></i><span data-i18n="nav.home">الرئيسية</span></a>
@@ -65,6 +67,7 @@
   <script src="js/recommendations.js"></script>
   <script src="js/i18n.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/exercises.js"></script>
   <script>
     const params = new URLSearchParams(window.location.search);
     const lowestAspectIndex = parseInt(params.get('aspect')) || 1;
@@ -99,9 +102,13 @@
         list.appendChild(div);
       });
 
-      const exerciseBtn = document.getElementById('exerciseBtn');
       if (rec) {
-        exerciseBtn.onclick = () => App.navigate(rec.exercise + '?aspect=' + lowestAspectIndex);
+        var exerciseBtn = document.getElementById('exerciseBtn');
+        if (exerciseBtn) {
+          exerciseBtn.onclick = function () {
+            App.navigate(rec.exercise + '?aspect=' + lowestAspectIndex);
+          };
+        }
       }
     }
 

@@ -6,6 +6,7 @@
   <meta name="theme-color" content="#5B8C85">
   <title>Mind Guard - الجوانب الخمسة للعافية</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style-additions.css">
 </head>
 <body>
   <button class="lang-toggle-btn" onclick="i18n.toggle()">EN</button>
@@ -14,7 +15,7 @@
     <h1 class="page-title text-center" data-i18n="aspects.title">الجوانب الخمسة للعافية</h1>
     <p class="page-subtitle text-center" data-i18n="aspects.subtitle">اختر الجانب الذي تريد تقييمه</p>
     <div class="aspect-grid">
-      <div class="aspect-card" onclick="App.navigate('quote-display.html?aspect=1')">
+      <div class="aspect-card" id="aspectCard1" onclick="handleAspectClick(1)">
         <div class="aspect-icon">
           <svg width="64" height="64" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="26" cy="26" r="24" fill="#F5F0E8"/>
@@ -25,8 +26,9 @@
         </div>
         <div class="aspect-name" data-i18n="aspect.physiological">الجانب الفيزيولوجي</div>
         <div class="aspect-desc" data-i18n="aspects.subtitle1">الجسم والطاقة</div>
+        <div class="cooldown-aspect-badge" id="cooldownBadge1"></div>
       </div>
-      <div class="aspect-card" onclick="App.navigate('quote-display.html?aspect=2')">
+      <div class="aspect-card" id="aspectCard2" onclick="handleAspectClick(2)">
         <div class="aspect-icon">
           <svg width="64" height="64" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="26" cy="26" r="24" fill="#F5F0E8"/>
@@ -38,8 +40,9 @@
         </div>
         <div class="aspect-name" data-i18n="aspect.behavioral">الجانب السلوكي</div>
         <div class="aspect-desc" data-i18n="aspects.subtitle2">الأفعال والإنجاز</div>
+        <div class="cooldown-aspect-badge" id="cooldownBadge2"></div>
       </div>
-      <div class="aspect-card" onclick="App.navigate('quote-display.html?aspect=3')">
+      <div class="aspect-card" id="aspectCard3" onclick="handleAspectClick(3)">
         <div class="aspect-icon">
           <svg width="64" height="64" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="26" cy="26" r="24" fill="#F5F0E8"/>
@@ -53,8 +56,9 @@
         </div>
         <div class="aspect-name" data-i18n="aspect.social">الجانب الاجتماعي</div>
         <div class="aspect-desc" data-i18n="aspects.subtitle3">العلاقات والدعم</div>
+        <div class="cooldown-aspect-badge" id="cooldownBadge3"></div>
       </div>
-      <div class="aspect-card" onclick="App.navigate('quote-display.html?aspect=4')">
+      <div class="aspect-card" id="aspectCard4" onclick="handleAspectClick(4)">
         <div class="aspect-icon">
           <svg width="64" height="64" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="26" cy="26" r="24" fill="#F5F0E8"/>
@@ -65,8 +69,9 @@
         </div>
         <div class="aspect-name" data-i18n="aspect.emotional">الجانب الانفعالي</div>
         <div class="aspect-desc" data-i18n="aspects.subtitle4">المشاعر والهدوء</div>
+        <div class="cooldown-aspect-badge" id="cooldownBadge4"></div>
       </div>
-      <div class="aspect-card" onclick="App.navigate('quote-display.html?aspect=5')">
+      <div class="aspect-card" id="aspectCard5" onclick="handleAspectClick(5)">
         <div class="aspect-icon">
           <svg width="64" height="64" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="26" cy="26" r="24" fill="#F5F0E8"/>
@@ -79,6 +84,7 @@
         </div>
         <div class="aspect-name" data-i18n="aspect.cognitive">الجانب المعرفي</div>
         <div class="aspect-desc" data-i18n="aspects.subtitle5">الأفكار والقرارات</div>
+        <div class="cooldown-aspect-badge" id="cooldownBadge5"></div>
       </div>
     </div>
   </div>
@@ -96,5 +102,29 @@
   <script src="js/recommendations.js"></script>
   <script src="js/i18n.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/exercises.js"></script>
+  <script>
+    function handleAspectClick(aspectNum) {
+      App.navigate('quote-display.html?aspect=' + aspectNum);
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      for (var i = 1; i <= 5; i++) {
+        try {
+          var badgeEl = document.getElementById('cooldownBadge' + i);
+          if (badgeEl && Exercises.isExerciseLocked(i)) {
+            var badge = document.createElement('span');
+            badge.className = 'cooldown-badge';
+            var remaining = Exercises.getCooldownTimeString(i);
+            if (i18n && i18n.t) { badge.textContent = i18n.t('exercise.cooldown.locked') + (remaining ? ' (' + remaining + ')' : ''); }
+            else { badge.textContent = 'مقفل 24 ساعة' + (remaining ? ' (' + remaining + ')' : ''); }
+            badgeEl.appendChild(badge);
+            var card = document.getElementById('aspectCard' + i);
+            if (card) card.classList.add('aspect-card-disabled');
+          }
+        } catch(e) { /* skip if error */ }
+      }
+    });
+  </script>
 </body>
 </html>

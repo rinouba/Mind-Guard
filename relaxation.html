@@ -107,8 +107,8 @@
       document.getElementById('relaxPauseBtn').style.display = 'none';
       document.getElementById('relaxEndBtn').style.display = 'none';
       const params = new URLSearchParams(window.location.search);
-      const aspect = params.get('aspect') || 1;
-      setTimeout(() => App.navigate('results.html?aspect=' + aspect + '&overall=50'), 2000);
+      const aspect = parseInt(params.get('aspect')) || 1;
+      setTimeout(function () { App.navigate('results.html?aspect=' + aspect + '&overall=50'); }, 2000);
     }
   </script>
 </body>
