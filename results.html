@@ -35,6 +35,7 @@
           <div class="score-label" data-i18n="results.wellbeingLabel">نسبة العافية النفسية</div>
         </div>
       </div>
+      <div id="scoreStatusText" class="score-status-text" style="text-align:center;padding:12px 20px 0;font-size:0.95rem;line-height:1.7;min-height:50px;transition:color 0.3s ease;"></div>
     </div>
 
     <div class="lowest-aspect-section" id="lowestSection">
@@ -45,6 +46,10 @@
       </div>
       <div style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:12px;" data-i18n="results.recommendationsHeader">توصيات مخصصة لك:</div>
       <div id="recommendationsList"></div>
+    </div>
+
+    <div id="trendSection" class="trend-section" style="margin:20px 0;padding:16px 24px;border-radius:20px;background:var(--card-bg);border:1px solid var(--card-border);min-height:24px;display:none;transition:all 0.3s ease;">
+      <div id="trendText" style="font-size:0.9rem;line-height:1.6;text-align:center;"></div>
     </div>
 
       <div class="results-actions">
@@ -81,6 +86,16 @@
       5: '<svg width="40" height="40" viewBox="0 0 52 52" fill="none"><circle cx="26" cy="26" r="24" fill="#F5F0E8"/><path d="M18 30c0 4.4 3.6 8 8 8s8-3.6 8-8v-4c0-3.3-2.7-6-6-6h-4c-3.3 0-6 2.7-6 6v4z" stroke="#5B8C85" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="rgba(91,140,133,0.08)"/></svg>'
     };
 
+    var resultsTrans = {
+      'results.status.good': { ar: 'المؤشرات الحالية تعكس مستوى جيداً من التوازن النفسي في هذا البعد', en: 'Current indicators reflect a good level of psychological balance in this aspect' },
+      'results.status.moderate': { ar: 'تشير المؤشرات إلى وجود ضغط نفسي يستحق الانتباه، يُنصح بمتابعته', en: 'Indicators suggest notable psychological pressure, follow-up is recommended' },
+      'results.status.low': { ar: 'تشير المؤشرات إلى مستوى مرتفع من الضغط النفسي، يُنصح بالتواصل مع مختص للحصول على دعم مناسب', en: 'Indicators show high psychological pressure, consulting a specialist is recommended' },
+      'results.trend.up': { ar: 'لاحظنا تحسناً في البعد خلال الأسبوع الأخير، استمري على هذا المسار', en: 'We noticed improvement in this aspect over the past week, keep up the good work' },
+      'results.trend.down': { ar: 'لاحظنا انخفاضاً في البعد مقارنة بالأسبوع السابق، قد يكون مفيداً التركيز على تمارين هذا الجانب', en: 'We noticed a decline compared to last week, consider focusing on this aspect\'s exercises' },
+      'results.trend.stable': { ar: 'مستوى البعد مستقر، يمكنك المحافظة عليه بالتمارين المقترحة', en: 'This aspect\'s level is stable, maintain it with the suggested exercises' }
+    };
+    for (var k in resultsTrans) { if (!i18n.translations[k]) i18n.translations[k] = resultsTrans[k]; }
+
     function renderResults() {
       const rec = RECOMMENDATIONS[lowestAspectIndex];
       document.getElementById('lowestIcon').innerHTML = aspectSvgs[lowestAspectIndex] || '';
@@ -108,6 +123,52 @@
           exerciseBtn.onclick = function () {
             App.navigate(rec.exercise + '?aspect=' + lowestAspectIndex);
           };
+        }
+      }
+    }
+
+    function getStatusText(score) {
+      if (score >= 70) return { key: 'results.status.good', color: '#4CAF50' };
+      if (score >= 50) return { key: 'results.status.moderate', color: '#FFC107' };
+      return { key: 'results.status.low', color: '#F44336' };
+    }
+
+    function getPreviousAspectScore(aspectIndex) {
+      var aspectMap = { 1: 'physiological', 2: 'behavioral', 3: 'social', 4: 'emotional', 5: 'cognitive' };
+      var key = aspectMap[aspectIndex];
+      var assessments = Storage.getAssessments();
+      if (assessments.length < 2) return null;
+      for (var i = assessments.length - 2; i >= 0; i--) {
+        if (assessments[i].scores && assessments[i].scores[key] !== undefined) {
+          return assessments[i].scores[key];
+        }
+      }
+      return null;
+    }
+
+    function getTrendText(diff) {
+      if (diff >= 5) return { key: 'results.trend.up', color: '#4CAF50' };
+      if (diff <= -5) return { key: 'results.trend.down', color: '#FFC107' };
+      return { key: 'results.trend.stable', color: '#7A8B87' };
+    }
+
+    function renderStatusAndTrend() {
+      var status = getStatusText(overallScore);
+      var statusEl = document.getElementById('scoreStatusText');
+      if (statusEl) {
+        statusEl.textContent = i18n.t(status.key);
+        statusEl.style.color = status.color;
+      }
+      var prevScore = getPreviousAspectScore(lowestAspectIndex);
+      if (prevScore !== null) {
+        var diff = overallScore - prevScore;
+        var trend = getTrendText(diff);
+        var trendSection = document.getElementById('trendSection');
+        var trendEl = document.getElementById('trendText');
+        if (trendEl && trendSection) {
+          trendEl.textContent = i18n.t(trend.key);
+          trendEl.style.color = trend.color;
+          trendSection.style.display = 'block';
         }
       }
     }
@@ -144,6 +205,7 @@
 
     checkAlertThreshold();
     renderResults();
+    renderStatusAndTrend();
   </script>
 </body>
 </html>
